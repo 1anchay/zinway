@@ -131,6 +131,140 @@
             border-left: 1px solid rgba(255, 255, 255, 0.1);
         }
         
+        /* Стили для мобильного меню */
+        #mobileMenu {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+        }
+        
+        #mobileMenu.show {
+            display: block;
+        }
+        
+        .menu-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(4px);
+        }
+        
+        .menu-panel {
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 85%;
+            max-width: 400px;
+            background: white;
+            box-shadow: -5px 0 25px rgba(0, 0, 0, 0.15);
+            transform: translateX(100%);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .menu-panel.show {
+            transform: translateX(0);
+        }
+        
+        .menu-content {
+            flex: 1;
+            overflow-y: auto;
+            padding-bottom: 20px;
+        }
+        
+        .menu-header {
+            background: linear-gradient(135deg, #0A1A3A 0%, #1E3A8A 100%);
+            padding: 20px;
+            color: white;
+        }
+        
+        .menu-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .menu-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(90deg);
+        }
+        
+        .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 16px 20px;
+            color: #374151;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid #f3f4f6;
+        }
+        
+        .menu-item:hover {
+            background: #fef2f2;
+            color: #DC2626;
+            padding-left: 25px;
+        }
+        
+        .menu-item i {
+            width: 24px;
+            margin-right: 12px;
+            text-align: center;
+            color: #9ca3af;
+        }
+        
+        .menu-item:hover i {
+            color: #DC2626;
+        }
+        
+        .menu-subitem {
+            padding: 12px 20px 12px 56px;
+            color: #6b7280;
+            font-size: 0.95rem;
+            border-bottom: 1px solid #f3f4f6;
+            transition: all 0.2s ease;
+        }
+        
+        .menu-subitem:hover {
+            background: #fef2f2;
+            color: #DC2626;
+            padding-left: 60px;
+        }
+        
+        .menu-accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .menu-accordion.active .menu-accordion-content {
+            max-height: 500px;
+        }
+        
+        .menu-accordion.active .fa-chevron-down {
+            transform: rotate(180deg);
+        }
+        
+        .menu-buttons {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            background: #f9fafb;
+            border-top: 1px solid #e5e7eb;
+        }
+        
         /* Адаптивность для компактной панели */
         @media (max-width: 1024px) {
             .compact-contact-panel {
@@ -162,6 +296,10 @@
             .compact-contact-panel {
                 flex-direction: column;
                 gap: 8px;
+            }
+            
+            .menu-panel {
+                width: 90%;
             }
         }
     </style>
@@ -277,30 +415,9 @@
                         <button class="hidden lg:flex border-2 border-gray-800 hover:bg-gray-800 hover:text-white text-gray-800 font-bold py-3 px-6 rounded-lg transition duration-300 items-center">
                             <i class="fas fa-comment-alt mr-2"></i>Консультация
                         </button>
-                        <button class="lg:hidden text-gray-800 p-2">
+                        <button onclick="openMobileMenu()" class="lg:hidden text-gray-800 p-3 hover:bg-gray-100 rounded-lg transition-colors duration-300">
                             <i class="fas fa-bars text-xl"></i>
                         </button>
-                    </div>
-                </div>
-                
-                <!-- Мобильная навигация -->
-                <div class="lg:hidden mt-4 border-t border-gray-200 pt-4">
-                    <div class="flex flex-wrap justify-center gap-4">
-                        <a href="#" class="text-gray-700 font-medium px-3 py-2 rounded-lg hover:bg-gray-100">
-                            Главная
-                        </a>
-                        <a href="#" class="text-gray-700 font-medium px-3 py-2 rounded-lg hover:bg-gray-100">
-                            Каталог
-                        </a>
-                        <a href="#" class="text-gray-700 font-medium px-3 py-2 rounded-lg hover:bg-gray-100">
-                            Услуги
-                        </a>
-                        <a href="#" class="text-gray-700 font-medium px-3 py-2 rounded-lg hover:bg-gray-100">
-                            О нас
-                        </a>
-                        <a href="#" class="text-gray-700 font-medium px-3 py-2 rounded-lg hover:bg-gray-100">
-                            Контакты
-                        </a>
                     </div>
                 </div>
             </div>
@@ -344,5 +461,216 @@
         </div>
     </header>
 
+    <!-- Мобильное меню -->
+    <div id="mobileMenu" class="fixed inset-0 z-50 hidden">
+        <div class="menu-overlay" onclick="closeMobileMenu()"></div>
+        <div class="menu-panel">
+            <!-- Заголовок меню -->
+            <div class="menu-header">
+                <div class="flex items-center">
+                    <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center mr-3">
+                        <span class="logo-font text-red-600 text-2xl font-black">Z</span>
+                    </div>
+                    <div>
+                        <h2 class="logo-font text-xl">ZINWAY</h2>
+                        <p class="text-sm text-gray-300">Your Way to Cars from the East</p>
+                    </div>
+                </div>
+                <button class="menu-close" onclick="closeMobileMenu()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <!-- Контент меню -->
+            <div class="menu-content">
+                <!-- Контакты -->
+                <div class="p-5 bg-gray-50 border-b">
+                    <div class="space-y-3">
+                        <a href="tel:+78005553535" class="flex items-center p-3 bg-white rounded-lg shadow-sm hover:shadow transition-shadow duration-300">
+                            <div class="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center mr-3">
+                                <i class="fas fa-phone text-red-600"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-gray-900">+7 (800) 555-35-35</div>
+                                <div class="text-xs text-gray-500">Бесплатный звонок</div>
+                            </div>
+                        </a>
+                        
+                        <div class="flex items-center p-3 bg-white rounded-lg shadow-sm">
+                            <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-3">
+                                <i class="fas fa-clock text-blue-600"></i>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-gray-900">9:00-20:00</div>
+                                <div class="text-xs text-gray-500">Пн-Пт, Сб-Вс 10:00-18:00</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Навигация -->
+                <nav class="py-2">
+                    <a href="#" class="menu-item" onclick="closeMobileMenu()">
+                        <i class="fas fa-home"></i>
+                        <span>Главная</span>
+                    </a>
+                    
+                    <a href="#" class="menu-item" onclick="closeMobileMenu()">
+                        <i class="fas fa-car"></i>
+                        <span>Каталог авто</span>
+                    </a>
+                    
+                    <!-- Аккордеон Услуги -->
+                    <div class="menu-accordion">
+                        <button class="menu-item w-full flex justify-between items-center" onclick="toggleAccordion(this)">
+                            <div class="flex items-center">
+                                <i class="fas fa-cogs"></i>
+                                <span>Услуги</span>
+                            </div>
+                            <i class="fas fa-chevron-down text-gray-400 text-sm transition-transform duration-300"></i>
+                        </button>
+                        <div class="menu-accordion-content">
+                            <a href="#" class="menu-subitem" onclick="closeMobileMenu()">Подбор авто</a>
+                            <a href="#" class="menu-subitem" onclick="closeMobileMenu()">Доставка и растаможка</a>
+                            <a href="#" class="menu-subitem" onclick="closeMobileMenu()">Сервисное обслуживание</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Аккордеон Автомобили -->
+                    <div class="menu-accordion">
+                        <button class="menu-item w-full flex justify-between items-center" onclick="toggleAccordion(this)">
+                            <div class="flex items-center">
+                                <i class="fas fa-globe-asia"></i>
+                                <span>Автомобили по странам</span>
+                            </div>
+                            <i class="fas fa-chevron-down text-gray-400 text-sm transition-transform duration-300"></i>
+                        </button>
+                        <div class="menu-accordion-content">
+                            <a href="#" class="menu-subitem" onclick="closeMobileMenu()">Китайские автомобили</a>
+                            <a href="#" class="menu-subitem" onclick="closeMobileMenu()">Корейские автомобили</a>
+                            <a href="#" class="menu-subitem" onclick="closeMobileMenu()">Японские автомобили</a>
+                        </div>
+                    </div>
+                    
+                    <a href="#" class="menu-item" onclick="closeMobileMenu()">
+                        <i class="fas fa-building"></i>
+                        <span>О компании</span>
+                    </a>
+                    
+                    <a href="#" class="menu-item" onclick="closeMobileMenu()">
+                        <i class="fas fa-comments"></i>
+                        <span>Отзывы клиентов</span>
+                    </a>
+                    
+                    <a href="#" class="menu-item" onclick="closeMobileMenu()">
+                        <i class="fas fa-address-book"></i>
+                        <span>Контакты</span>
+                    </a>
+                </nav>
+                
+                <!-- Социальные сети -->
+                <div class="px-5 py-4 border-t">
+                    <p class="text-sm text-gray-500 mb-3">Мы в социальных сетях:</p>
+                    <div class="flex space-x-3">
+                        <a href="#" class="w-12 h-12 bg-gradient-to-br from-green-600 to-green-700 rounded-xl flex items-center justify-center text-white hover:scale-110 transition-transform duration-300" title="Avito">
+                            <i class="fas fa-store"></i>
+                        </a>
+                        <a href="#" class="w-12 h-12 bg-gradient-to-br from-black to-gray-800 rounded-xl flex items-center justify-center text-white hover:scale-110 transition-transform duration-300" title="TikTok">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                        <a href="#" class="w-12 h-12 bg-gradient-to-br from-purple-600 to-pink-600 rounded-xl flex items-center justify-center text-white hover:scale-110 transition-transform duration-300" title="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Бренды -->
+                <div class="px-5 py-4 border-t">
+                    <p class="text-sm text-gray-500 mb-3">Работаем с брендами:</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1.5 bg-red-50 text-red-700 rounded-full text-xs font-medium border border-red-100">Li Auto</span>
+                        <span class="px-3 py-1.5 bg-blue-50 text-blue-700 rounded-full text-xs font-medium border border-blue-100">Geely</span>
+                        <span class="px-3 py-1.5 bg-green-50 text-green-700 rounded-full text-xs font-medium border border-green-100">Changan</span>
+                        <span class="px-3 py-1.5 bg-purple-50 text-purple-700 rounded-full text-xs font-medium border border-purple-100">Chery</span>
+                        <span class="px-3 py-1.5 bg-yellow-50 text-yellow-700 rounded-full text-xs font-medium border border-yellow-100">Haval</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Кнопки действий -->
+            <div class="menu-buttons">
+                <button onclick="closeMobileMenu()" class="w-full bg-gradient-to-r from-red-600 to-red-700 text-white font-semibold py-4 rounded-xl flex items-center justify-center hover:from-red-700 hover:to-red-800 transition-colors duration-300">
+                    <i class="fas fa-car mr-3"></i> Подобрать авто
+                </button>
+                
+                <button onclick="closeMobileMenu()" class="w-full border-2 border-red-600 text-red-600 font-semibold py-4 rounded-xl flex items-center justify-center hover:bg-red-50 transition-colors duration-300">
+                    <i class="fas fa-headset mr-3"></i> Заказать звонок
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Функции управления мобильным меню
+        function openMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const panel = document.querySelector('.menu-panel');
+            
+            menu.classList.add('show');
+            setTimeout(() => {
+                panel.classList.add('show');
+            }, 10);
+            
+            // Блокируем скролл страницы
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const panel = document.querySelector('.menu-panel');
+            
+            panel.classList.remove('show');
+            setTimeout(() => {
+                menu.classList.remove('show');
+            }, 300);
+            
+            // Разблокируем скролл страницы
+            document.body.style.overflow = '';
+        }
+        
+        // Аккордеон в мобильном меню
+        function toggleAccordion(button) {
+            const accordion = button.closest('.menu-accordion');
+            const isActive = accordion.classList.contains('active');
+            
+            // Закрываем все остальные аккордеоны
+            document.querySelectorAll('.menu-accordion').forEach(otherAccordion => {
+                if (otherAccordion !== accordion) {
+                    otherAccordion.classList.remove('active');
+                }
+            });
+            
+            // Переключаем текущий аккордеон
+            if (!isActive) {
+                accordion.classList.add('active');
+            } else {
+                accordion.classList.remove('active');
+            }
+        }
+        
+        // Закрытие меню при нажатии Escape
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeMobileMenu();
+            }
+        });
+        
+        // Инициализация - закрываем все аккордеоны при загрузке
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.menu-accordion').forEach(accordion => {
+                accordion.classList.remove('active');
+            });
+        });
+    </script>
 </body>
 </html>
