@@ -17,7 +17,6 @@
         }
         .header-gradient {
             background: linear-gradient(135deg, #0A1A3A 0%, #1E3A8A 100%);
-            transition: all 0.3s ease;
         }
         .nav-link {
             position: relative;
@@ -70,90 +69,6 @@
         }
         .instagram-bg {
             background: linear-gradient(135deg, #833AB4 0%, #FD1D1D 50%, #F56040 100%);
-        }
-        .business-border {
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        /* Стили для компактной контактной панели */
-        .contact-panel {
-            transition: all 0.3s ease;
-            overflow: hidden;
-        }
-        
-        .contact-panel.hidden {
-            max-height: 0;
-            padding-top: 0;
-            padding-bottom: 0;
-            opacity: 0;
-            transform: translateY(-10px);
-        }
-        
-        .compact-contact-panel {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 15px;
-        }
-        
-        .contact-item-compact {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 6px 12px;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            background: rgba(255, 255, 255, 0.05);
-            flex: 1;
-            min-width: 180px;
-        }
-        
-        .contact-item-compact:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateY(-1px);
-        }
-        
-        .contact-icon {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #DC2626 0%, #B91C1C 100%);
-            flex-shrink: 0;
-        }
-        
-        .contact-text {
-            display: flex;
-            flex-direction: column;
-            min-width: 0;
-        }
-        
-        .contact-main {
-            font-weight: 600;
-            font-size: 0.85rem;
-            line-height: 1.2;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        
-        .contact-sub {
-            font-size: 0.7rem;
-            color: rgba(255, 255, 255, 0.7);
-            line-height: 1.2;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        
-        .social-section {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding-left: 12px;
-            border-left: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         /* Информационная панель */
@@ -341,74 +256,32 @@
         }
         
         /* Адаптивность */
-        @media (max-width: 1200px) {
-            .compact-contact-panel {
-                gap: 10px;
-            }
-            
-            .contact-item-compact {
-                min-width: 160px;
-            }
-        }
-        
-        @media (max-width: 992px) {
-            .compact-contact-panel {
-                flex-wrap: wrap;
-                justify-content: flex-start;
-            }
-            
-            .contact-item-compact {
-                flex: 0 0 calc(50% - 10px);
-                min-width: 0;
-            }
-            
-            .social-section {
-                border-left: none;
-                padding-left: 0;
-                margin-top: 10px;
-                width: 100%;
-                justify-content: flex-start;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .contact-item-compact {
-                flex: 0 0 100%;
-                margin-bottom: 5px;
-            }
-            
-            .compact-contact-panel {
-                flex-direction: column;
-                gap: 5px;
-            }
-            
-            .social-section {
-                justify-content: center;
-                border-top: 1px solid rgba(255, 255, 255, 0.1);
-                padding-top: 10px;
-                margin-top: 10px;
-            }
-            
-            .contact-main {
-                font-size: 0.9rem;
-            }
-            
-            .contact-sub {
-                font-size: 0.75rem;
-            }
-        }
-        
         @media (max-width: 640px) {
             .menu-panel {
                 width: 90%;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .z-logo {
+                width: 12px;
+                height: 12px;
+            }
+            
+            .logo-font.text-3xl {
+                font-size: 1.75rem;
+            }
+            
+            .red-btn {
+                padding: 10px 15px;
+                font-size: 0.9rem;
             }
         }
     </style>
 </head>
 <body>
     <!-- Header -->
-    
-        
+    <header class="sticky top-0 z-50 shadow-2xl bg-white">
         <!-- Основная навигация -->
         <nav class="bg-white py-4">
             <div class="container mx-auto px-4">
@@ -536,7 +409,7 @@
             
             <!-- Контент меню -->
             <div class="menu-content">
-                <!-- Контакты -->
+                <!-- Контакты (оставлены в мобильном меню) -->
                 <div class="p-5 bg-gray-50 border-b">
                     <div class="space-y-3">
                         <a href="tel:+78005553535" class="flex items-center p-3 bg-white rounded-lg shadow-sm hover:shadow transition-shadow duration-300">
@@ -664,13 +537,6 @@
     </div>
 
     <script>
-        // Переменные для отслеживания скролла
-        let lastScrollTop = 0;
-        let contactPanelVisible = true;
-        const contactPanel = document.querySelector('.contact-panel');
-        const infoPanel = document.querySelector('.info-panel');
-        const header = document.querySelector('header');
-
         // Функции управления мобильным меню
         function openMobileMenu() {
             const menu = document.getElementById('mobileMenu');
@@ -729,24 +595,26 @@
             }
         }
         
-        // Управление скрытием панелей при скролле
+        // Управление скрытием информационной панели при скролле
+        let lastScrollTop = 0;
+        const infoPanel = document.querySelector('.info-panel');
+        let infoPanelVisible = true;
+
         function handleScroll() {
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
             
-            // Показываем/скрываем контактную панель при скролле вниз/вверх
-            if (scrollTop > lastScrollTop && scrollTop > 100) {
+            // Показываем/скрываем информационную панель при скролле вниз/вверх
+            if (scrollTop > lastScrollTop && scrollTop > 50) {
                 // Скроллим вниз
-                if (contactPanelVisible) {
-                    contactPanel.classList.add('hidden');
+                if (infoPanelVisible) {
                     infoPanel.classList.add('hidden');
-                    contactPanelVisible = false;
+                    infoPanelVisible = false;
                 }
             } else if (scrollTop < lastScrollTop) {
                 // Скроллим вверх
-                if (!contactPanelVisible && scrollTop < 300) {
-                    contactPanel.classList.remove('hidden');
+                if (!infoPanelVisible && scrollTop < 200) {
                     infoPanel.classList.remove('hidden');
-                    contactPanelVisible = true;
+                    infoPanelVisible = true;
                 }
             }
             
@@ -776,11 +644,6 @@
                     closeMobileMenu();
                 });
             });
-        });
-        
-        // Очистка при размонтировании
-        window.addEventListener('beforeunload', function() {
-            window.removeEventListener('scroll', handleScroll);
         });
     </script>
 </body>
