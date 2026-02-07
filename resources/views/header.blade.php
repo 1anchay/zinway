@@ -10,6 +10,7 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
         }
         .logo-font {
             font-family: 'Montserrat', sans-serif;
@@ -78,7 +79,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 20px;
+            gap: 15px;
         }
         
         .contact-item-compact {
@@ -89,6 +90,8 @@
             border-radius: 8px;
             transition: all 0.3s ease;
             background: rgba(255, 255, 255, 0.05);
+            flex: 1;
+            min-width: 180px;
         }
         
         .contact-item-compact:hover {
@@ -104,23 +107,31 @@
             align-items: center;
             justify-content: center;
             background: linear-gradient(135deg, #DC2626 0%, #B91C1C 100%);
+            flex-shrink: 0;
         }
         
         .contact-text {
             display: flex;
             flex-direction: column;
+            min-width: 0;
         }
         
         .contact-main {
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             line-height: 1.2;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         
         .contact-sub {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: rgba(255, 255, 255, 0.7);
             line-height: 1.2;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         
         .social-section {
@@ -129,6 +140,54 @@
             gap: 12px;
             padding-left: 12px;
             border-left: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Информационная панель - скрывается на мобильных */
+        .info-panel-desktop {
+            display: block;
+        }
+        
+        .info-panel-mobile {
+            display: none;
+            padding: 10px 15px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .info-panel-toggle {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: none;
+            border: none;
+            padding: 8px 0;
+            color: #495057;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        
+        .info-panel-toggle i {
+            transition: transform 0.3s ease;
+        }
+        
+        .info-panel-toggle.active i {
+            transform: rotate(180deg);
+        }
+        
+        .info-panel-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            background: white;
+            border-radius: 8px;
+            margin-top: 5px;
+        }
+        
+        .info-panel-content.active {
+            max-height: 500px;
+            padding: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
         
         /* Стили для мобильного меню */
@@ -266,40 +325,107 @@
         }
         
         /* Адаптивность для компактной панели */
-        @media (max-width: 1024px) {
+        @media (max-width: 1200px) {
             .compact-contact-panel {
-                flex-wrap: wrap;
-                justify-content: center;
                 gap: 10px;
             }
             
             .contact-item-compact {
-                flex: 1;
-                min-width: 200px;
-                max-width: 250px;
+                min-width: 160px;
+            }
+            
+            .contact-main {
+                font-size: 0.8rem;
+            }
+            
+            .contact-sub {
+                font-size: 0.65rem;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .compact-contact-panel {
+                flex-wrap: wrap;
+                justify-content: flex-start;
+            }
+            
+            .contact-item-compact {
+                flex: 0 0 calc(50% - 10px);
+                min-width: 0;
             }
             
             .social-section {
                 border-left: none;
                 padding-left: 0;
-                justify-content: center;
-                width: 100%;
                 margin-top: 10px;
+                width: 100%;
+                justify-content: flex-start;
             }
         }
         
-        @media (max-width: 640px) {
+        @media (max-width: 768px) {
+            .info-panel-desktop {
+                display: none;
+            }
+            
+            .info-panel-mobile {
+                display: block;
+            }
+            
             .contact-item-compact {
-                min-width: 100%;
+                flex: 0 0 100%;
+                margin-bottom: 5px;
             }
             
             .compact-contact-panel {
                 flex-direction: column;
-                gap: 8px;
+                gap: 5px;
             }
             
+            .social-section {
+                justify-content: center;
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+                padding-top: 10px;
+                margin-top: 10px;
+            }
+            
+            .contact-main {
+                font-size: 0.9rem;
+            }
+            
+            .contact-sub {
+                font-size: 0.75rem;
+            }
+        }
+        
+        @media (max-width: 640px) {
             .menu-panel {
                 width: 90%;
+            }
+            
+            .contact-item-compact {
+                padding: 8px 12px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .z-logo {
+                width: 12px;
+                height: 12px;
+            }
+            
+            .logo-font.text-3xl {
+                font-size: 1.75rem;
+            }
+            
+            .red-btn {
+                padding: 10px 15px;
+                font-size: 0.9rem;
+            }
+            
+            .contact-main {
+                white-space: normal;
+                line-height: 1.3;
             }
         }
     </style>
@@ -342,7 +468,7 @@
                         </div>
                     </div>
                     
-                    <!-- Социальные сети справа -->
+                    <!-- Социальные сети -->
                     <div class="social-section">
                         <span class="text-sm text-gray-300 whitespace-nowrap">Мы в соцсетях:</span>
                         <div class="flex gap-2">
@@ -364,24 +490,27 @@
         <!-- Основная навигация -->
         <nav class="bg-white py-4">
             <div class="container mx-auto px-4">
-                <div class="flex flex-col lg:flex-row justify-between items-center">
+                <div class="flex items-center justify-between">
                     <!-- Логотип и название -->
-                    <div class="flex items-center mb-4 lg:mb-0">
+                    <div class="flex items-center">
                         <div class="relative mr-4">
                             <div class="z-logo w-14 h-14 flex items-center justify-center">
                                 <span class="logo-font text-white text-3xl font-black">Z</span>
                             </div>
                         </div>
-                        <div>
+                        <div class="hidden lg:block">
                             <h1 class="logo-font text-3xl font-black text-gray-900 leading-tight">
                                 ZINWAY
                                 <span class="block text-sm font-normal text-gray-600 mt-1">Your Way to Cars from the East</span>
                             </h1>
                         </div>
+                        <div class="lg:hidden">
+                            <h1 class="logo-font text-2xl font-black text-gray-900">ZINWAY</h1>
+                        </div>
                     </div>
                     
-                    <!-- Навигационные ссылки -->
-                    <div class="hidden lg:flex items-center space-x-8 mb-4 lg:mb-0">
+                    <!-- Навигационные ссылки (скрыты на мобильных) -->
+                    <div class="hidden lg:flex items-center space-x-8">
                         <a href="#" class="nav-link text-gray-800 font-semibold hover:text-red-600">
                             Главная
                         </a>
@@ -408,9 +537,11 @@
                     </div>
                     
                     <!-- Кнопки действий -->
-                    <div class="flex items-center space-x-4">
-                        <button class="red-btn text-white font-bold py-3 px-6 rounded-lg flex items-center">
-                            <i class="fas fa-car mr-2"></i>Подобрать авто
+                    <div class="flex items-center space-x-3">
+                        <button class="red-btn text-white font-bold py-3 px-4 lg:px-6 rounded-lg flex items-center whitespace-nowrap">
+                            <i class="fas fa-car mr-2"></i>
+                            <span class="hidden sm:inline">Подобрать авто</span>
+                            <span class="sm:hidden">Подбор</span>
                         </button>
                         <button class="hidden lg:flex border-2 border-gray-800 hover:bg-gray-800 hover:text-white text-gray-800 font-bold py-3 px-6 rounded-lg transition duration-300 items-center">
                             <i class="fas fa-comment-alt mr-2"></i>Консультация
@@ -423,18 +554,18 @@
             </div>
         </nav>
         
-        <!-- Информационная панель -->
-        <div class="bg-gray-50 py-3 border-y border-gray-200">
+        <!-- Информационная панель - Desktop (скрывается на мобильных) -->
+        <div class="info-panel-desktop bg-gray-50 py-3 border-y border-gray-200">
             <div class="container mx-auto px-4">
                 <div class="flex flex-col md:flex-row justify-between items-center">
-                    <div class="flex items-center mb-2 md:mb-0">
-                        <div class="flex items-center mr-6">
+                    <div class="flex flex-wrap items-center gap-4 md:gap-6 mb-3 md:mb-0">
+                        <div class="flex items-center">
                             <div class="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center mr-2">
                                 <i class="fas fa-check-circle text-red-600"></i>
                             </div>
                             <span class="text-sm font-medium text-gray-800">Гарантия 12 месяцев</span>
                         </div>
-                        <div class="flex items-center mr-6">
+                        <div class="flex items-center">
                             <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-2">
                                 <i class="fas fa-file-contract text-blue-600"></i>
                             </div>
@@ -450,10 +581,60 @@
                     
                     <div class="text-center md:text-right">
                         <span class="text-sm text-gray-600">Автомобили из:</span>
-                        <div class="flex space-x-3 mt-1 justify-center md:justify-end">
+                        <div class="flex space-x-2 mt-1 justify-center md:justify-end">
                             <span class="px-3 py-1 bg-white border border-gray-300 rounded-full text-xs font-medium">Китай</span>
                             <span class="px-3 py-1 bg-white border border-gray-300 rounded-full text-xs font-medium">Япония</span>
                             <span class="px-3 py-1 bg-white border border-gray-300 rounded-full text-xs font-medium">Корея</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Информационная панель - Mobile (аккордеон) -->
+        <div class="info-panel-mobile">
+            <button class="info-panel-toggle" onclick="toggleInfoPanel()">
+                <span>Информация о компании</span>
+                <i class="fas fa-chevron-down"></i>
+            </button>
+            <div class="info-panel-content" id="mobileInfoPanel">
+                <div class="grid grid-cols-1 gap-4">
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center mr-3">
+                            <i class="fas fa-check-circle text-red-600"></i>
+                        </div>
+                        <div>
+                            <div class="font-medium text-gray-800">Гарантия 12 месяцев</div>
+                            <div class="text-xs text-gray-600">На все автомобили с полным ТО</div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-3">
+                            <i class="fas fa-file-contract text-blue-600"></i>
+                        </div>
+                        <div>
+                            <div class="font-medium text-gray-800">Юридическая чистота</div>
+                            <div class="text-xs text-gray-600">Проверка истории и документов</div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center mr-3">
+                            <i class="fas fa-ruble-sign text-green-600"></i>
+                        </div>
+                        <div>
+                            <div class="font-medium text-gray-800">Без скрытых платежей</div>
+                            <div class="text-xs text-gray-600">Фиксированная цена при оформлении</div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="text-sm font-medium text-gray-800 mb-2">Автомобили из:</div>
+                        <div class="flex gap-2">
+                            <span class="px-3 py-1.5 bg-red-50 text-red-700 rounded-full text-xs font-medium border border-red-100">Китай</span>
+                            <span class="px-3 py-1.5 bg-blue-50 text-blue-700 rounded-full text-xs font-medium border border-blue-100">Япония</span>
+                            <span class="px-3 py-1.5 bg-green-50 text-green-700 rounded-full text-xs font-medium border border-green-100">Корея</span>
                         </div>
                     </div>
                 </div>
@@ -656,6 +837,15 @@
             } else {
                 accordion.classList.remove('active');
             }
+        }
+        
+        // Аккордеон для информационной панели на мобильных
+        function toggleInfoPanel() {
+            const toggleBtn = document.querySelector('.info-panel-toggle');
+            const panel = document.getElementById('mobileInfoPanel');
+            
+            toggleBtn.classList.toggle('active');
+            panel.classList.toggle('active');
         }
         
         // Закрытие меню при нажатии Escape
