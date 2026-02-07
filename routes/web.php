@@ -2,9 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
+Route::get('welcome', function () {
     return view('welcome');
-});
+})->name('welcome'); // Добавьте это
 
 // Маршрут для каталога
 Route::get('/catalog', function () {
@@ -23,3 +23,7 @@ Route::get('/services', function () {
 Route::get('/contacts', function () {
     return view('contacts');
 })->name('contacts');
+
+Route::get('/rasta', function () {
+    return view('rasta');
+})->name('rasta');

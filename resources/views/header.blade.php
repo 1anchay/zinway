@@ -71,18 +71,12 @@
             background: linear-gradient(135deg, #833AB4 0%, #FD1D1D 50%, #F56040 100%);
         }
         
-        /* Информационная панель */
-        .info-panel {
-            transition: all 0.3s ease;
-        }
-        
-        .info-panel.hidden {
-            max-height: 0;
-            opacity: 0;
-            overflow: hidden;
-            padding-top: 0;
-            padding-bottom: 0;
-            border: none;
+        /* Информационная панель в хедере */
+        .header-info {
+            background: linear-gradient(135deg, #0A1A3A 0%, #1E3A8A 100%);
+            padding: 6px 0;
+            color: white;
+            font-size: 0.75rem;
         }
         
         /* Стили для мобильного меню */
@@ -255,10 +249,30 @@
             to { opacity: 1; }
         }
         
+        /* Стили для гарантий в хедере */
+        .header-guarantee {
+            display: flex;
+            align-items: center;
+            padding: 2px 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            font-size: 0.7rem;
+            white-space: nowrap;
+        }
+        
+        .header-guarantee i {
+            margin-right: 4px;
+            font-size: 0.6rem;
+        }
+        
         /* Адаптивность */
         @media (max-width: 640px) {
             .menu-panel {
                 width: 90%;
+            }
+            
+            .header-info {
+                display: none;
             }
         }
         
@@ -281,7 +295,45 @@
 </head>
 <body>
     <!-- Header -->
-    <header class="sticky top-0 z-50 shadow-2xl bg-white">
+    <header class="sticky top-0 z-50 shadow-2xl">
+        <!-- Информационная строка в хедере -->
+        <div class="header-info hidden lg:block">
+            <div class="container mx-auto px-4">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-6">
+                        <div class="header-guarantee">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Гарантия 12 месяцев</span>
+                        </div>
+                        <div class="header-guarantee">
+                            <i class="fas fa-file-contract"></i>
+                            <span>Юридическая чистота</span>
+                        </div>
+                        <div class="header-guarantee">
+                            <i class="fas fa-ruble-sign"></i>
+                            <span>Без скрытых платежей</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center space-x-4">
+                        <div class="flex items-center">
+                            <span class="mr-2 text-xs text-gray-300">Автомобили из:</span>
+                            <div class="flex space-x-1">
+                                <span class="px-2 py-0.5 bg-white/10 backdrop-blur-sm rounded text-xs font-medium">Китай</span>
+                                <span class="px-2 py-0.5 bg-white/10 backdrop-blur-sm rounded text-xs font-medium">Япония</span>
+                                <span class="px-2 py-0.5 bg-white/10 backdrop-blur-sm rounded text-xs font-medium">Корея</span>
+                            </div>
+                        </div>
+                        <div class="h-4 w-px bg-white/30"></div>
+                        <a href="tel:+78005553535" class="text-xs hover:text-red-200 transition-colors">
+                            <i class="fas fa-phone mr-1"></i>
+                            +7 (800) 555-35-35
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
         <!-- Основная навигация -->
         <nav class="bg-white py-4">
             <div class="container mx-auto px-4">
@@ -306,10 +358,10 @@
                     
                     <!-- Навигационные ссылки (скрыты на мобильных) -->
                     <div class="hidden lg:flex items-center space-x-8">
-                        <a href="#" class="nav-link text-gray-800 font-semibold hover:text-red-600">
+                        <a href="{{ route('welcome') }}" class="nav-link text-gray-800 font-semibold hover:text-red-600">
                             Главная
                         </a>
-                        <a href="#" class="nav-link text-gray-800 font-semibold hover:text-red-600">
+                        <a href="{{ route('catalog') }}" class="nav-link text-gray-800 font-semibold hover:text-red-600">
                             Каталог авто
                         </a>
                         <div class="relative group">
@@ -319,8 +371,8 @@
                             </a>
                             <div class="absolute left-0 mt-2 w-48 bg-white rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-10 border border-gray-100">
                                 <a href="{{ route('catalog') }}" class="block px-4 py-3 text-gray-700 hover:bg-red-50 hover:text-red-600 border-b border-gray-100">Каталог</a>
-                                <a href="#" class="block px-4 py-3 text-gray-700 hover:bg-red-50 hover:text-red-600 border-b border-gray-100">Доставка и растаможка</a>
-                                <a href="#" class="block px-4 py-3 text-gray-700 hover:bg-red-50 hover:text-red-600">Сервисное обслуживание</a>
+                                <a href="{{ route('rasta') }}" class="block px-4 py-3 text-gray-700 hover:bg-red-50 hover:text-red-600 border-b border-gray-100">Доставка и растаможка</a>
+                                <a href="{{ route('services') }}" class="block px-4 py-3 text-gray-700 hover:bg-red-50 hover:text-red-600">Сервисное обслуживание</a>
                             </div>
                         </div>
                         <a href="#" class="nav-link text-gray-800 font-semibold hover:text-red-600">
@@ -348,43 +400,6 @@
                 </div>
             </div>
         </nav>
-        
-        <!-- Информационная панель -->
-        <div class="info-panel bg-gray-50 py-3 border-y border-gray-200">
-            <div class="container mx-auto px-4">
-                <div class="flex flex-col md:flex-row justify-between items-center">
-                    <div class="flex flex-wrap items-center gap-4 md:gap-6 mb-3 md:mb-0">
-                        <div class="flex items-center">
-                            <div class="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center mr-2">
-                                <i class="fas fa-check-circle text-red-600"></i>
-                            </div>
-                            <span class="text-sm font-medium text-gray-800">Гарантия 12 месяцев</span>
-                        </div>
-                        <div class="flex items-center">
-                            <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-2">
-                                <i class="fas fa-file-contract text-blue-600"></i>
-                            </div>
-                            <span class="text-sm font-medium text-gray-800">Юридическая чистота</span>
-                        </div>
-                        <div class="flex items-center">
-                            <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-2">
-                                <i class="fas fa-ruble-sign text-green-600"></i>
-                            </div>
-                            <span class="text-sm font-medium text-gray-800">Без скрытых платежей</span>
-                        </div>
-                    </div>
-                    
-                    <div class="text-center md:text-right">
-                        <span class="text-sm text-gray-600">Автомобили из:</span>
-                        <div class="flex space-x-2 mt-1 justify-center md:justify-end">
-                            <span class="px-3 py-1 bg-white border border-gray-300 rounded-full text-xs font-medium">Китай</span>
-                            <span class="px-3 py-1 bg-white border border-gray-300 rounded-full text-xs font-medium">Япония</span>
-                            <span class="px-3 py-1 bg-white border border-gray-300 rounded-full text-xs font-medium">Корея</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </header>
 
     <!-- Мобильное меню -->
@@ -436,12 +451,12 @@
                 
                 <!-- Навигация -->
                 <nav class="py-2">
-                    <a href="#" class="menu-link" onclick="closeMobileMenu()">
+                    <a href="#{{ route('welcome') }}" class="menu-link" onclick="closeMobileMenu()">
                         <i class="fas fa-home"></i>
                         <span>Главная</span>
                     </a>
                     
-                    <a href="#" class="menu-link" onclick="closeMobileMenu()">
+                    <a href="{{ route('catalog') }}" class="menu-link" onclick="closeMobileMenu()">
                         <i class="fas fa-car"></i>
                         <span>Каталог авто</span>
                     </a>
@@ -456,9 +471,9 @@
                             <i class="fas fa-chevron-down ml-auto text-gray-400 text-sm transition-transform duration-300"></i>
                         </button>
                         <div class="menu-accordion-content">
-                            <a href="#" class="menu-subitem" onclick="closeMobileMenu()">Подбор авто</a>
-                            <a href="#" class="menu-subitem" onclick="closeMobileMenu()">Доставка и растаможка</a>
-                            <a href="#" class="menu-subitem" onclick="closeMobileMenu()">Сервисное обслуживание</a>
+                            <a href="{{ route('catalog') }}" class="menu-subitem" onclick="closeMobileMenu()">Подбор авто</a>
+                            <a href="{{ route('rasta') }}" class="menu-subitem" onclick="closeMobileMenu()">Доставка и растаможка</a>
+                            <a href="{{ route('services') }}" class="menu-subitem" onclick="closeMobileMenu()">Сервисное обслуживание</a>
                         </div>
                     </div>
                     
@@ -595,32 +610,6 @@
             }
         }
         
-        // Управление скрытием информационной панели при скролле
-        let lastScrollTop = 0;
-        const infoPanel = document.querySelector('.info-panel');
-        let infoPanelVisible = true;
-
-        function handleScroll() {
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            
-            // Показываем/скрываем информационную панель при скролле вниз/вверх
-            if (scrollTop > lastScrollTop && scrollTop > 50) {
-                // Скроллим вниз
-                if (infoPanelVisible) {
-                    infoPanel.classList.add('hidden');
-                    infoPanelVisible = false;
-                }
-            } else if (scrollTop < lastScrollTop) {
-                // Скроллим вверх
-                if (!infoPanelVisible && scrollTop < 200) {
-                    infoPanel.classList.remove('hidden');
-                    infoPanelVisible = true;
-                }
-            }
-            
-            lastScrollTop = scrollTop;
-        }
-        
         // Закрытие меню при нажатии Escape
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
@@ -634,9 +623,6 @@
             document.querySelectorAll('.menu-accordion').forEach(accordion => {
                 accordion.classList.remove('active');
             });
-            
-            // Добавляем обработчик скролла
-            window.addEventListener('scroll', handleScroll);
             
             // Добавляем обработчики кликов для закрытия меню при клике на ссылки
             document.querySelectorAll('.menu-subitem, .menu-link').forEach(link => {
