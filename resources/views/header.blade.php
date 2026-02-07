@@ -17,6 +17,7 @@
         }
         .header-gradient {
             background: linear-gradient(135deg, #0A1A3A 0%, #1E3A8A 100%);
+            transition: all 0.3s ease;
         }
         .nav-link {
             position: relative;
@@ -75,6 +76,19 @@
         }
         
         /* Стили для компактной контактной панели */
+        .contact-panel {
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .contact-panel.hidden {
+            max-height: 0;
+            padding-top: 0;
+            padding-bottom: 0;
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        
         .compact-contact-panel {
             display: flex;
             align-items: center;
@@ -142,63 +156,29 @@
             border-left: 1px solid rgba(255, 255, 255, 0.1);
         }
         
-        /* Информационная панель - скрывается на мобильных */
-        .info-panel-desktop {
-            display: block;
+        /* Информационная панель */
+        .info-panel {
+            transition: all 0.3s ease;
         }
         
-        .info-panel-mobile {
-            display: none;
-            padding: 10px 15px;
-            background: #f8f9fa;
-            border-bottom: 1px solid #e9ecef;
-        }
-        
-        .info-panel-toggle {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: none;
-            border: none;
-            padding: 8px 0;
-            color: #495057;
-            font-weight: 500;
-            cursor: pointer;
-        }
-        
-        .info-panel-toggle i {
-            transition: transform 0.3s ease;
-        }
-        
-        .info-panel-toggle.active i {
-            transform: rotate(180deg);
-        }
-        
-        .info-panel-content {
+        .info-panel.hidden {
             max-height: 0;
+            opacity: 0;
             overflow: hidden;
-            transition: max-height 0.3s ease-out;
-            background: white;
-            border-radius: 8px;
-            margin-top: 5px;
-        }
-        
-        .info-panel-content.active {
-            max-height: 500px;
-            padding: 15px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            padding-top: 0;
+            padding-bottom: 0;
+            border: none;
         }
         
         /* Стили для мобильного меню */
-        #mobileMenu {
-            display: none;
+        .mobile-menu {
             position: fixed;
             inset: 0;
-            z-index: 100;
+            z-index: 9999;
+            display: none;
         }
         
-        #mobileMenu.show {
+        .mobile-menu.show {
             display: block;
         }
         
@@ -207,6 +187,7 @@
             inset: 0;
             background: rgba(0, 0, 0, 0.7);
             backdrop-filter: blur(4px);
+            animation: fadeIn 0.3s ease;
         }
         
         .menu-panel {
@@ -238,6 +219,7 @@
             background: linear-gradient(135deg, #0A1A3A 0%, #1E3A8A 100%);
             padding: 20px;
             color: white;
+            position: relative;
         }
         
         .menu-close {
@@ -253,6 +235,8 @@
             align-items: center;
             justify-content: center;
             transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
         }
         
         .menu-close:hover {
@@ -268,31 +252,57 @@
             font-weight: 500;
             transition: all 0.2s ease;
             border-bottom: 1px solid #f3f4f6;
+            width: 100%;
+            text-align: left;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
         }
         
-        .menu-item:hover {
+        .menu-item:not(.accordion-btn):hover {
             background: #fef2f2;
             color: #DC2626;
             padding-left: 25px;
         }
         
-        .menu-item i {
+        .menu-link {
+            display: flex;
+            align-items: center;
+            padding: 16px 20px;
+            color: #374151;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid #f3f4f6;
+            width: 100%;
+            text-decoration: none;
+        }
+        
+        .menu-link:hover {
+            background: #fef2f2;
+            color: #DC2626;
+            padding-left: 25px;
+        }
+        
+        .menu-item i, .menu-link i {
             width: 24px;
             margin-right: 12px;
             text-align: center;
             color: #9ca3af;
         }
         
-        .menu-item:hover i {
+        .menu-item:hover i, .menu-link:hover i {
             color: #DC2626;
         }
         
         .menu-subitem {
+            display: block;
             padding: 12px 20px 12px 56px;
             color: #6b7280;
             font-size: 0.95rem;
             border-bottom: 1px solid #f3f4f6;
             transition: all 0.2s ease;
+            text-decoration: none;
         }
         
         .menu-subitem:hover {
@@ -324,7 +334,13 @@
             border-top: 1px solid #e5e7eb;
         }
         
-        /* Адаптивность для компактной панели */
+        /* Анимации */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* Адаптивность */
         @media (max-width: 1200px) {
             .compact-contact-panel {
                 gap: 10px;
@@ -332,14 +348,6 @@
             
             .contact-item-compact {
                 min-width: 160px;
-            }
-            
-            .contact-main {
-                font-size: 0.8rem;
-            }
-            
-            .contact-sub {
-                font-size: 0.65rem;
             }
         }
         
@@ -364,14 +372,6 @@
         }
         
         @media (max-width: 768px) {
-            .info-panel-desktop {
-                display: none;
-            }
-            
-            .info-panel-mobile {
-                display: block;
-            }
-            
             .contact-item-compact {
                 flex: 0 0 100%;
                 margin-bottom: 5px;
@@ -402,39 +402,14 @@
             .menu-panel {
                 width: 90%;
             }
-            
-            .contact-item-compact {
-                padding: 8px 12px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .z-logo {
-                width: 12px;
-                height: 12px;
-            }
-            
-            .logo-font.text-3xl {
-                font-size: 1.75rem;
-            }
-            
-            .red-btn {
-                padding: 10px 15px;
-                font-size: 0.9rem;
-            }
-            
-            .contact-main {
-                white-space: normal;
-                line-height: 1.3;
-            }
         }
     </style>
 </head>
 <body>
     <!-- Header -->
-    <header class="sticky top-0 z-50 shadow-2xl">
+    <header class="sticky top-0 z-50 shadow-2xl bg-white">
         <!-- Верхняя контактная панель - КОМПАКТНАЯ -->
-        <div class="header-gradient text-white py-3 px-4 business-border">
+        <div class="contact-panel header-gradient text-white py-3 px-4 business-border">
             <div class="container mx-auto">
                 <div class="compact-contact-panel">
                     <!-- Контактные данные в компактном формате -->
@@ -554,8 +529,8 @@
             </div>
         </nav>
         
-        <!-- Информационная панель - Desktop (скрывается на мобильных) -->
-        <div class="info-panel-desktop bg-gray-50 py-3 border-y border-gray-200">
+        <!-- Информационная панель -->
+        <div class="info-panel bg-gray-50 py-3 border-y border-gray-200">
             <div class="container mx-auto px-4">
                 <div class="flex flex-col md:flex-row justify-between items-center">
                     <div class="flex flex-wrap items-center gap-4 md:gap-6 mb-3 md:mb-0">
@@ -590,62 +565,12 @@
                 </div>
             </div>
         </div>
-        
-        <!-- Информационная панель - Mobile (аккордеон) -->
-        <div class="info-panel-mobile">
-            <button class="info-panel-toggle" onclick="toggleInfoPanel()">
-                <span>Информация о компании</span>
-                <i class="fas fa-chevron-down"></i>
-            </button>
-            <div class="info-panel-content" id="mobileInfoPanel">
-                <div class="grid grid-cols-1 gap-4">
-                    <div class="flex items-center">
-                        <div class="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center mr-3">
-                            <i class="fas fa-check-circle text-red-600"></i>
-                        </div>
-                        <div>
-                            <div class="font-medium text-gray-800">Гарантия 12 месяцев</div>
-                            <div class="text-xs text-gray-600">На все автомобили с полным ТО</div>
-                        </div>
-                    </div>
-                    
-                    <div class="flex items-center">
-                        <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-3">
-                            <i class="fas fa-file-contract text-blue-600"></i>
-                        </div>
-                        <div>
-                            <div class="font-medium text-gray-800">Юридическая чистота</div>
-                            <div class="text-xs text-gray-600">Проверка истории и документов</div>
-                        </div>
-                    </div>
-                    
-                    <div class="flex items-center">
-                        <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center mr-3">
-                            <i class="fas fa-ruble-sign text-green-600"></i>
-                        </div>
-                        <div>
-                            <div class="font-medium text-gray-800">Без скрытых платежей</div>
-                            <div class="text-xs text-gray-600">Фиксированная цена при оформлении</div>
-                        </div>
-                    </div>
-                    
-                    <div>
-                        <div class="text-sm font-medium text-gray-800 mb-2">Автомобили из:</div>
-                        <div class="flex gap-2">
-                            <span class="px-3 py-1.5 bg-red-50 text-red-700 rounded-full text-xs font-medium border border-red-100">Китай</span>
-                            <span class="px-3 py-1.5 bg-blue-50 text-blue-700 rounded-full text-xs font-medium border border-blue-100">Япония</span>
-                            <span class="px-3 py-1.5 bg-green-50 text-green-700 rounded-full text-xs font-medium border border-green-100">Корея</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </header>
 
     <!-- Мобильное меню -->
-    <div id="mobileMenu" class="fixed inset-0 z-50 hidden">
+    <div class="mobile-menu" id="mobileMenu">
         <div class="menu-overlay" onclick="closeMobileMenu()"></div>
-        <div class="menu-panel">
+        <div class="menu-panel" id="menuPanel">
             <!-- Заголовок меню -->
             <div class="menu-header">
                 <div class="flex items-center">
@@ -691,24 +616,24 @@
                 
                 <!-- Навигация -->
                 <nav class="py-2">
-                    <a href="#" class="menu-item" onclick="closeMobileMenu()">
+                    <a href="#" class="menu-link" onclick="closeMobileMenu()">
                         <i class="fas fa-home"></i>
                         <span>Главная</span>
                     </a>
                     
-                    <a href="#" class="menu-item" onclick="closeMobileMenu()">
+                    <a href="#" class="menu-link" onclick="closeMobileMenu()">
                         <i class="fas fa-car"></i>
                         <span>Каталог авто</span>
                     </a>
                     
                     <!-- Аккордеон Услуги -->
                     <div class="menu-accordion">
-                        <button class="menu-item w-full flex justify-between items-center" onclick="toggleAccordion(this)">
+                        <button class="menu-item accordion-btn" onclick="toggleAccordion(this)">
                             <div class="flex items-center">
                                 <i class="fas fa-cogs"></i>
                                 <span>Услуги</span>
                             </div>
-                            <i class="fas fa-chevron-down text-gray-400 text-sm transition-transform duration-300"></i>
+                            <i class="fas fa-chevron-down ml-auto text-gray-400 text-sm transition-transform duration-300"></i>
                         </button>
                         <div class="menu-accordion-content">
                             <a href="#" class="menu-subitem" onclick="closeMobileMenu()">Подбор авто</a>
@@ -719,12 +644,12 @@
                     
                     <!-- Аккордеон Автомобили -->
                     <div class="menu-accordion">
-                        <button class="menu-item w-full flex justify-between items-center" onclick="toggleAccordion(this)">
+                        <button class="menu-item accordion-btn" onclick="toggleAccordion(this)">
                             <div class="flex items-center">
                                 <i class="fas fa-globe-asia"></i>
                                 <span>Автомобили по странам</span>
                             </div>
-                            <i class="fas fa-chevron-down text-gray-400 text-sm transition-transform duration-300"></i>
+                            <i class="fas fa-chevron-down ml-auto text-gray-400 text-sm transition-transform duration-300"></i>
                         </button>
                         <div class="menu-accordion-content">
                             <a href="#" class="menu-subitem" onclick="closeMobileMenu()">Китайские автомобили</a>
@@ -733,17 +658,17 @@
                         </div>
                     </div>
                     
-                    <a href="#" class="menu-item" onclick="closeMobileMenu()">
+                    <a href="#" class="menu-link" onclick="closeMobileMenu()">
                         <i class="fas fa-building"></i>
                         <span>О компании</span>
                     </a>
                     
-                    <a href="#" class="menu-item" onclick="closeMobileMenu()">
+                    <a href="#" class="menu-link" onclick="closeMobileMenu()">
                         <i class="fas fa-comments"></i>
                         <span>Отзывы клиентов</span>
                     </a>
                     
-                    <a href="#" class="menu-item" onclick="closeMobileMenu()">
+                    <a href="#" class="menu-link" onclick="closeMobileMenu()">
                         <i class="fas fa-address-book"></i>
                         <span>Контакты</span>
                     </a>
@@ -792,10 +717,17 @@
     </div>
 
     <script>
+        // Переменные для отслеживания скролла
+        let lastScrollTop = 0;
+        let contactPanelVisible = true;
+        const contactPanel = document.querySelector('.contact-panel');
+        const infoPanel = document.querySelector('.info-panel');
+        const header = document.querySelector('header');
+
         // Функции управления мобильным меню
         function openMobileMenu() {
             const menu = document.getElementById('mobileMenu');
-            const panel = document.querySelector('.menu-panel');
+            const panel = document.getElementById('menuPanel');
             
             menu.classList.add('show');
             setTimeout(() => {
@@ -808,7 +740,7 @@
         
         function closeMobileMenu() {
             const menu = document.getElementById('mobileMenu');
-            const panel = document.querySelector('.menu-panel');
+            const panel = document.getElementById('menuPanel');
             
             panel.classList.remove('show');
             setTimeout(() => {
@@ -823,29 +755,55 @@
         function toggleAccordion(button) {
             const accordion = button.closest('.menu-accordion');
             const isActive = accordion.classList.contains('active');
+            const chevron = button.querySelector('.fa-chevron-down');
             
             // Закрываем все остальные аккордеоны
             document.querySelectorAll('.menu-accordion').forEach(otherAccordion => {
                 if (otherAccordion !== accordion) {
                     otherAccordion.classList.remove('active');
+                    const otherChevron = otherAccordion.querySelector('.fa-chevron-down');
+                    if (otherChevron) {
+                        otherChevron.style.transform = 'rotate(0deg)';
+                    }
                 }
             });
             
             // Переключаем текущий аккордеон
             if (!isActive) {
                 accordion.classList.add('active');
+                if (chevron) {
+                    chevron.style.transform = 'rotate(180deg)';
+                }
             } else {
                 accordion.classList.remove('active');
+                if (chevron) {
+                    chevron.style.transform = 'rotate(0deg)';
+                }
             }
         }
         
-        // Аккордеон для информационной панели на мобильных
-        function toggleInfoPanel() {
-            const toggleBtn = document.querySelector('.info-panel-toggle');
-            const panel = document.getElementById('mobileInfoPanel');
+        // Управление скрытием панелей при скролле
+        function handleScroll() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
             
-            toggleBtn.classList.toggle('active');
-            panel.classList.toggle('active');
+            // Показываем/скрываем контактную панель при скролле вниз/вверх
+            if (scrollTop > lastScrollTop && scrollTop > 100) {
+                // Скроллим вниз
+                if (contactPanelVisible) {
+                    contactPanel.classList.add('hidden');
+                    infoPanel.classList.add('hidden');
+                    contactPanelVisible = false;
+                }
+            } else if (scrollTop < lastScrollTop) {
+                // Скроллим вверх
+                if (!contactPanelVisible && scrollTop < 300) {
+                    contactPanel.classList.remove('hidden');
+                    infoPanel.classList.remove('hidden');
+                    contactPanelVisible = true;
+                }
+            }
+            
+            lastScrollTop = scrollTop;
         }
         
         // Закрытие меню при нажатии Escape
@@ -855,11 +813,27 @@
             }
         });
         
-        // Инициализация - закрываем все аккордеоны при загрузке
+        // Инициализация
         document.addEventListener('DOMContentLoaded', function() {
+            // Закрываем все аккордеоны при загрузке
             document.querySelectorAll('.menu-accordion').forEach(accordion => {
                 accordion.classList.remove('active');
             });
+            
+            // Добавляем обработчик скролла
+            window.addEventListener('scroll', handleScroll);
+            
+            // Добавляем обработчики кликов для закрытия меню при клике на ссылки
+            document.querySelectorAll('.menu-subitem, .menu-link').forEach(link => {
+                link.addEventListener('click', function() {
+                    closeMobileMenu();
+                });
+            });
+        });
+        
+        // Очистка при размонтировании
+        window.addEventListener('beforeunload', function() {
+            window.removeEventListener('scroll', handleScroll);
         });
     </script>
 </body>
