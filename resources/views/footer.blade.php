@@ -15,301 +15,377 @@
         .logo-font {
             font-family: 'Montserrat', sans-serif;
         }
+        
+        /* Плавный переход в футер */
         .footer-gradient {
-            background: linear-gradient(135deg, #0A1A3A 0%, #1E3A8A 100%);
+            background: linear-gradient(to top, #0A1A3A 0%, #1E3A8A 30%, #2D4A9C 100%);
+            position: relative;
+            overflow: hidden;
         }
-        .red-btn {
+        
+        /* Декоративный элемент - дорога в перспективе */
+        .road-perspective {
+            position: absolute;
+            top: -50px;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: linear-gradient(to bottom, transparent, #1E3A8A);
+            z-index: 1;
+        }
+        
+        .road-perspective::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                #DC2626 10%, 
+                #DC2626 90%, 
+                transparent 100%);
+            box-shadow: 0 0 20px rgba(220, 38, 38, 0.3);
+        }
+        
+        /* Стили для социальных иконок */
+        .social-icon {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .social-icon:hover {
+            transform: translateY(-3px) scale(1.1);
+            border-color: rgba(220, 38, 38, 0.3);
+            background: rgba(220, 38, 38, 0.1);
+        }
+        
+        .avito-bg:hover {
+            background: linear-gradient(135deg, #6CC24A 0%, #4CAF50 100%);
+        }
+        
+        .tiktok-bg:hover {
+            background: linear-gradient(135deg, #000000 0%, #333333 100%);
+        }
+        
+        .instagram-bg:hover {
+            background: linear-gradient(135deg, #833AB4 0%, #FD1D1D 50%, #F56040 100%);
+        }
+        
+        .vk-bg:hover {
+            background: linear-gradient(135deg, #4C75A3 0%, #2A5885 100%);
+        }
+        
+        /* Стили для ссылок */
+        .footer-link {
+            transition: all 0.3s ease;
+            padding: 6px 0;
+            display: inline-block;
+            position: relative;
+        }
+        
+        .footer-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: #DC2626;
+            transition: width 0.3s ease;
+        }
+        
+        .footer-link:hover {
+            color: #DC2626;
+            padding-left: 8px;
+        }
+        
+        .footer-link:hover::after {
+            width: 20px;
+        }
+        
+        /* Стили для контактных элементов */
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 18px;
+            transition: all 0.3s ease;
+            padding: 8px;
+            border-radius: 8px;
+        }
+        
+        .contact-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateX(5px);
+        }
+        
+        /* Карта */
+        .map-container {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            height: 200px;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .map-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .map-placeholder::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 40%, rgba(220, 38, 38, 0.1) 50%, transparent 60%);
+            animation: mapShine 3s infinite;
+        }
+        
+        @keyframes mapShine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        /* Форма подписки */
+        .newsletter-input {
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .newsletter-input:focus {
+            border-color: #DC2626;
+            box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.2);
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .newsletter-input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        /* Карточки услуг */
+        .service-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(220, 38, 38, 0.3);
+            background: rgba(220, 38, 38, 0.05);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Кнопки */
+        .footer-btn {
             background: linear-gradient(135deg, #DC2626 0%, #B91C1C 100%);
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(220, 38, 38, 0.2);
         }
-        .red-btn:hover {
+        
+        .footer-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(220, 38, 38, 0.3);
+            box-shadow: 0 8px 25px rgba(220, 38, 38, 0.4);
+            background: linear-gradient(135deg, #B91C1C 0%, #991B1B 100%);
         }
-        .social-icon {
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-        }
-        .social-icon:hover {
-            transform: translateY(-3px);
-        }
-        .avito-bg {
-            background: linear-gradient(135deg, #6CC24A 0%, #4CAF50 100%);
-        }
-        .tiktok-bg {
-            background: linear-gradient(135deg, #000000 0%, #333333 100%);
-        }
-        .instagram-bg {
-            background: linear-gradient(135deg, #833AB4 0%, #FD1D1D 50%, #F56040 100%);
-        }
-        .road-container {
-            position: relative;
-            height: 120px;
-            overflow: hidden;
-            background: #1e293b;
-        }
-        .road-line {
-            position: absolute;
-            top: 50%;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: repeating-linear-gradient(
-                90deg,
-                transparent,
-                transparent 30px,
-                #fbbf24 30px,
-                #fbbf24 60px
-            );
-            transform: translateY(-50%);
-        }
-        .car {
-            position: absolute;
-            top: 50%;
-            left: 0;
-            width: 80px;
-            height: 40px;
-            transform: translateY(-50%);
-            animation: drive 20s linear infinite;
-            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.3));
-        }
-        @keyframes drive {
-            0% { left: -100px; }
-            100% { left: 100%; }
-        }
-        .car-body {
-            position: absolute;
-            width: 70px;
-            height: 30px;
-            background: linear-gradient(135deg, #DC2626 0%, #B91C1C 100%);
-            border-radius: 10px 15px 5px 5px;
-        }
-        .car-top {
-            position: absolute;
-            top: -15px;
-            left: 10px;
-            width: 50px;
-            height: 20px;
-            background: linear-gradient(135deg, #DC2626 0%, #B91C1C 100%);
-            border-radius: 10px 10px 5px 5px;
-        }
-        .car-wheel {
-            position: absolute;
-            width: 15px;
-            height: 15px;
-            background: #1e293b;
-            border-radius: 50%;
-            border: 3px solid #94a3b8;
-            bottom: -5px;
-            animation: wheelRotate 0.5s linear infinite;
-        }
-        @keyframes wheelRotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        .car-wheel-front {
-            left: 10px;
-        }
-        .car-wheel-back {
-            right: 10px;
-        }
-        .car-light {
-            position: absolute;
-            width: 8px;
-            height: 5px;
-            background: #fbbf24;
-            border-radius: 50%;
-            right: -4px;
-            top: 10px;
-            box-shadow: 0 0 10px 5px rgba(251, 191, 36, 0.7);
-        }
-        .footer-link {
-            transition: all 0.3s ease;
-            padding: 4px 0;
-            display: inline-block;
-        }
-        .footer-link:hover {
-            color: #DC2626;
-            transform: translateX(5px);
-        }
-        .contact-item {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 15px;
-            transition: transform 0.3s ease;
-        }
-        .contact-item:hover {
-            transform: translateX(5px);
-        }
-        .map-container {
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            background: #1e293b;
-            height: 200px;
-            position: relative;
-        }
-        .map-placeholder {
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #334155 0%, #1e293b 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 600;
-        }
-        .newsletter-input {
-            border: 2px solid #cbd5e1;
-            transition: all 0.3s ease;
-        }
-        .newsletter-input:focus {
-            border-color: #DC2626;
-            box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
-        }
+        
+        /* Разделители */
         .footer-divider {
             border-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Анимации */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-fadeInUp {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+        
+        /* Декоративные элементы футера */
+        .footer-decoration {
+            position: absolute;
+            pointer-events: none;
+        }
+        
+        .decoration-1 {
+            top: 10%;
+            left: 5%;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(220, 38, 38, 0.1) 0%, transparent 70%);
+        }
+        
+        .decoration-2 {
+            bottom: 20%;
+            right: 10%;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
         }
     </style>
 </head>
 <body>
-    <!-- Основной контент (для демонстрации) -->
-    <main class="min-h-screen flex items-center justify-center">
-        <div class="text-center p-8">
-            <h1 class="text-4xl font-bold text-gray-800 mb-4">Zinway - Автомобили из Азии</h1>
-            <p class="text-gray-600">Прокрутите вниз, чтобы увидеть footer</p>
-            <div class="mt-8 text-6xl">
-                <i class="fas fa-arrow-down text-blue-600 animate-bounce"></i>
-            </div>
-        </div>
-    </main>
-
-    <!-- Анимированная дорога с машиной -->
-    <div class="road-container">
-        <div class="road-line"></div>
-        <div class="car">
-            <div class="car-body"></div>
-            <div class="car-top"></div>
-            <div class="car-wheel car-wheel-front"></div>
-            <div class="car-wheel car-wheel-back"></div>
-            <div class="car-light"></div>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <footer class="footer-gradient text-white pt-12 pb-8">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 lg:grid-cols-4 gap-8 mb-12">
+    
+    <footer class="footer-gradient text-white pt-20 pb-10 relative">
+        <!-- Декоративные элементы -->
+        <div class="footer-decoration decoration-1"></div>
+        <div class="footer-decoration decoration-2"></div>
+        
+        <!-- Плавный переход-дорога -->
+        <div class="road-perspective"></div>
+        
+        <div class="container mx-auto px-6 relative z-10">
+            <!-- Верхняя часть футера -->
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-10 mb-16">
                 <!-- Колонка 1: О компании -->
-                <div>
-                    <div class="flex items-center mb-6">
-                        <div class="w-12 h-12 bg-gradient-to-br from-red-600 to-red-700 rounded-lg flex items-center justify-center mr-3">
-                            <span class="logo-font text-white text-2xl font-black">Z</span>
+                <div class="animate-fadeInUp" style="animation-delay: 0.1s;">
+                    <div class="flex items-center mb-8">
+                        <div class="w-14 h-14 bg-gradient-to-br from-red-600 to-red-700 rounded-xl flex items-center justify-center mr-4 shadow-lg">
+                            <span class="logo-font text-white text-3xl font-black">Z</span>
                         </div>
                         <div>
-                            <h3 class="logo-font text-2xl font-black">ZINWAY</h3>
-                            <p class="text-sm text-gray-300">Your Way to Cars from the East</p>
+                            <h3 class="logo-font text-2xl font-black bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">ZINWAY</h3>
+                            <p class="text-sm text-gray-300 mt-1">Your Way to Cars from the East</p>
                         </div>
                     </div>
-                    <p class="text-gray-300 mb-6">
-                        Ведущий импортер автомобилей из Китая, Японии и Кореи. 
-                        Профессиональное сопровождение, гарантия качества и полная 
-                        юридическая безопасность сделок.
+                    <p class="text-gray-300 mb-8 leading-relaxed">
+                        Ведущий импортер автомобилей из Китая и Азии. Обеспечиваем полный цикл услуг: 
+                        от подбора авто до сервисного обслуживания. Безопасность и качество — наш приоритет.
                     </p>
                     <div class="flex space-x-3">
-                        <a href="#" class="social-icon avito-bg text-white" title="Наш Avito">
+                        <a href="#" class="social-icon text-white hover:text-white" title="Наш Avito">
                             <i class="fas fa-store text-lg"></i>
                         </a>
-                        <a href="#" class="social-icon tiktok-bg text-white" title="Наш TikTok">
+                        <a href="#" class="social-icon text-white hover:text-white" title="Наш TikTok">
                             <i class="fab fa-tiktok text-lg"></i>
                         </a>
-                        <a href="#" class="social-icon instagram-bg text-white" title="Наш Instagram">
+                        <a href="#" class="social-icon text-white hover:text-white" title="Наш Instagram">
                             <i class="fab fa-instagram text-lg"></i>
                         </a>
-                        <a href="#" class="social-icon bg-blue-600 text-white" title="Наш VK">
+                        <a href="#" class="social-icon text-white hover:text-white" title="Наш VK">
                             <i class="fab fa-vk text-lg"></i>
                         </a>
                     </div>
                 </div>
 
                 <!-- Колонка 2: Навигация -->
-                <div>
-                    <h4 class="text-xl font-bold mb-6 border-l-4 border-red-600 pl-3">Навигация</h4>
+                <div class="animate-fadeInUp" style="animation-delay: 0.2s;">
+                    <h4 class="text-xl font-bold mb-8 pb-3 border-b border-white border-opacity-20 relative">
+                        Навигация
+                        <div class="absolute bottom-0 left-0 w-12 h-0.5 bg-red-600"></div>
+                    </h4>
                     <ul class="space-y-3">
                         <li><a href="#" class="footer-link text-gray-300 hover:text-white">Главная</a></li>
                         <li><a href="#" class="footer-link text-gray-300 hover:text-white">Каталог автомобилей</a></li>
-                        <li><a href="#" class="footer-link text-gray-300 hover:text-white">Автомобили из Китая</a></li>
-                        <li><a href="#" class="footer-link text-gray-300 hover:text-white">Автомобили из Японии</a></li>
-                        <li><a href="#" class="footer-link text-gray-300 hover:text-white">Автомобили из Кореи</a></li>
+                        <li><a href="#" class="footer-link text-gray-300 hover:text-white">Китайские авто</a></li>
+                        <li><a href="#" class="footer-link text-gray-300 hover:text-white">Корейские авто</a></li>
+                        <li><a href="#" class="footer-link text-gray-300 hover:text-white">Японские авто</a></li>
                         <li><a href="#" class="footer-link text-gray-300 hover:text-white">Как мы работаем</a></li>
                         <li><a href="#" class="footer-link text-gray-300 hover:text-white">Отзывы клиентов</a></li>
+                        <li><a href="#" class="footer-link text-gray-300 hover:text-white">Контакты</a></li>
                     </ul>
                 </div>
 
                 <!-- Колонка 3: Контакты -->
-                <div>
-                    <h4 class="text-xl font-bold mb-6 border-l-4 border-red-600 pl-3">Контакты</h4>
-                    <div class="space-y-4">
+                <div class="animate-fadeInUp" style="animation-delay: 0.3s;">
+                    <h4 class="text-xl font-bold mb-8 pb-3 border-b border-white border-opacity-20 relative">
+                        Контакты
+                        <div class="absolute bottom-0 left-0 w-12 h-0.5 bg-red-600"></div>
+                    </h4>
+                    <div class="space-y-5">
                         <div class="contact-item">
-                            <div class="w-10 h-10 bg-red-600 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
+                            <div class="w-12 h-12 bg-gradient-to-br from-red-600 to-red-700 rounded-full flex items-center justify-center mr-4 flex-shrink-0 shadow-lg">
                                 <i class="fas fa-phone-alt"></i>
                             </div>
                             <div>
-                                <p class="font-semibold">+7 (800) 555-35-35</p>
-                                <p class="text-sm text-gray-300">Бесплатный звонок по России</p>
+                                <p class="font-semibold text-lg">+7 (800) 555-35-35</p>
+                                <p class="text-sm text-gray-300 mt-1">Бесплатный звонок по России</p>
                             </div>
                         </div>
                         <div class="contact-item">
-                            <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
+                            <div class="w-12 h-12 bg-gradient-to-br from-blue-600 to-blue-700 rounded-full flex items-center justify-center mr-4 flex-shrink-0 shadow-lg">
                                 <i class="fas fa-envelope"></i>
                             </div>
                             <div>
-                                <p class="font-semibold">info@zinway.ru</p>
-                                <p class="text-sm text-gray-300">Для общих вопросов</p>
+                                <p class="font-semibold text-lg">info@zinway.ru</p>
+                                <p class="text-sm text-gray-300 mt-1">Для общих вопросов</p>
                             </div>
                         </div>
                         <div class="contact-item">
-                            <div class="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
+                            <div class="w-12 h-12 bg-gradient-to-br from-green-600 to-green-700 rounded-full flex items-center justify-center mr-4 flex-shrink-0 shadow-lg">
                                 <i class="fas fa-map-marker-alt"></i>
                             </div>
                             <div>
-                                <p class="font-semibold">Москва, ул. Автомобильная, 15</p>
-                                <p class="text-sm text-gray-300">Офис продаж и демо-зал</p>
+                                <p class="font-semibold text-lg">Москва, ул. Автомобильная, 15</p>
+                                <p class="text-sm text-gray-300 mt-1">Офис продаж и демо-зал</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Колонка 4: Рассылка и карта -->
-                <div>
-                    <h4 class="text-xl font-bold mb-6 border-l-4 border-red-600 pl-3">Новости и акции</h4>
-                    <p class="text-gray-300 mb-4">Подпишитесь на рассылку, чтобы первыми узнавать о новых поступлениях и специальных предложениях.</p>
+                <div class="animate-fadeInUp" style="animation-delay: 0.4s;">
+                    <h4 class="text-xl font-bold mb-8 pb-3 border-b border-white border-opacity-20 relative">
+                        Новости и акции
+                        <div class="absolute bottom-0 left-0 w-12 h-0.5 bg-red-600"></div>
+                    </h4>
+                    <p class="text-gray-300 mb-6">Подпишитесь, чтобы первыми получать информацию о новых поступлениях и специальных предложениях.</p>
                     
-                    <form class="mb-6">
+                    <form class="mb-8">
                         <div class="flex mb-4">
-                            <input type="email" placeholder="Ваш email" class="newsletter-input flex-grow px-4 py-3 rounded-l-lg text-gray-900 focus:outline-none">
-                            <button type="submit" class="red-btn px-6 rounded-r-lg font-semibold">
+                            <input type="email" placeholder="Ваш email" 
+                                   class="newsletter-input flex-grow px-5 py-3.5 rounded-l-xl focus:outline-none">
+                            <button type="submit" class="footer-btn px-6 rounded-r-xl font-semibold flex items-center">
                                 <i class="fas fa-paper-plane"></i>
                             </button>
                         </div>
-                        <div class="flex items-center text-sm text-gray-300">
-                            <input type="checkbox" id="agree" class="mr-2">
+                        <div class="flex items-start text-sm text-gray-300">
+                            <input type="checkbox" id="agree" class="mt-1 mr-3">
                             <label for="agree">Согласен с политикой конфиденциальности</label>
                         </div>
                     </form>
                     
                     <div class="map-container">
                         <div class="map-placeholder">
-                            <div class="text-center">
-                                <i class="fas fa-map-marked-alt text-4xl mb-3 text-yellow-400"></i>
-                                <p>Карта расположения офиса</p>
-                                <p class="text-sm text-gray-300 mt-1">Москва, ул. Автомобильная, 15</p>
+                            <div class="relative z-10 text-center">
+                                <i class="fas fa-map-marker-alt text-5xl mb-4 text-red-400"></i>
+                                <p class="font-semibold text-lg">Наш офис в Москве</p>
+                                <p class="text-sm text-gray-300 mt-2">ул. Автомобильная, 15</p>
+                                <p class="text-xs text-gray-400 mt-1">Пн-Пт: 9:00-20:00</p>
                             </div>
                         </div>
                     </div>
@@ -317,71 +393,166 @@
             </div>
 
             <!-- Дополнительные услуги -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-10">
-                <div class="bg-white bg-opacity-5 p-4 rounded-lg border border-white border-opacity-10">
-                    <div class="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center mb-3 mx-auto">
-                        <i class="fas fa-passport text-xl"></i>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
+                <div class="service-card p-6 rounded-xl text-center">
+                    <div class="w-16 h-16 bg-gradient-to-br from-red-600 to-red-700 rounded-full flex items-center justify-center mb-4 mx-auto shadow-lg">
+                        <i class="fas fa-passport text-white text-xl"></i>
                     </div>
-                    <p class="text-center font-semibold">Растаможка</p>
+                    <h5 class="font-bold mb-2">Растаможка</h5>
+                    <p class="text-sm text-gray-300">Полное оформление таможенных документов</p>
                 </div>
-                <div class="bg-white bg-opacity-5 p-4 rounded-lg border border-white border-opacity-10">
-                    <div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mb-3 mx-auto">
-                        <i class="fas fa-file-contract text-xl"></i>
+                
+                <div class="service-card p-6 rounded-xl text-center">
+                    <div class="w-16 h-16 bg-gradient-to-br from-blue-600 to-blue-700 rounded-full flex items-center justify-center mb-4 mx-auto shadow-lg">
+                        <i class="fas fa-file-contract text-white text-xl"></i>
                     </div>
-                    <p class="text-center font-semibold">Юридическое сопровождение</p>
+                    <h5 class="font-bold mb-2">Юридическое сопровождение</h5>
+                    <p class="text-sm text-gray-300">Полная юридическая безопасность сделки</p>
                 </div>
-                <div class="bg-white bg-opacity-5 p-4 rounded-lg border border-white border-opacity-10">
-                    <div class="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center mb-3 mx-auto">
-                        <i class="fas fa-truck-loading text-xl"></i>
+                
+                <div class="service-card p-6 rounded-xl text-center">
+                    <div class="w-16 h-16 bg-gradient-to-br from-green-600 to-green-700 rounded-full flex items-center justify-center mb-4 mx-auto shadow-lg">
+                        <i class="fas fa-truck-loading text-white text-xl"></i>
                     </div>
-                    <p class="text-center font-semibold">Доставка по РФ</p>
+                    <h5 class="font-bold mb-2">Доставка по РФ</h5>
+                    <p class="text-sm text-gray-300">Быстрая доставка в любой регион России</p>
                 </div>
-                <div class="bg-white bg-opacity-5 p-4 rounded-lg border border-white border-opacity-10">
-                    <div class="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center mb-3 mx-auto">
-                        <i class="fas fa-tools text-xl"></i>
+                
+                <div class="service-card p-6 rounded-xl text-center">
+                    <div class="w-16 h-16 bg-gradient-to-br from-purple-600 to-purple-700 rounded-full flex items-center justify-center mb-4 mx-auto shadow-lg">
+                        <i class="fas fa-tools text-white text-xl"></i>
                     </div>
-                    <p class="text-center font-semibold">Сервисное обслуживание</p>
+                    <h5 class="font-bold mb-2">Сервисное обслуживание</h5>
+                    <p class="text-sm text-gray-300">Гарантия и обслуживание у официальных дилеров</p>
                 </div>
             </div>
 
             <!-- Нижняя часть футера -->
-            <div class="border-t footer-divider pt-8">
-                <div class="flex flex-col md:flex-row justify-between items-center">
-                    <div class="mb-4 md:mb-0">
-                        <p class="text-gray-400 text-sm">
-                            &copy; 2023 Zinway. Все права защищены. 
-                            <a href="#" class="text-red-400 hover:text-red-300 ml-2">Политика конфиденциальности</a>
+            <div class="border-t footer-divider pt-10">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-6 mb-8">
+                    <div>
+                        <p class="text-gray-400">
+                            &copy; 2023 Zinway. Все права защищены.
+                            <a href="#" class="text-red-400 hover:text-red-300 ml-2 font-medium">Политика конфиденциальности</a>
                         </p>
                     </div>
                     
-                    <div class="flex flex-wrap justify-center gap-4">
-                        <div class="flex items-center">
-                            <i class="fas fa-credit-card text-gray-400 mr-2"></i>
-                            <span class="text-sm text-gray-400">Принимаем к оплате:</span>
-                            <div class="flex ml-2">
-                                <i class="fab fa-cc-visa text-2xl mx-1 text-gray-300"></i>
-                                <i class="fab fa-cc-mastercard text-2xl mx-1 text-gray-300"></i>
-                                <i class="fas fa-university text-2xl mx-1 text-gray-300"></i>
+                    <div class="flex items-center">
+                        <span class="text-gray-400 mr-3 text-sm">Принимаем к оплате:</span>
+                        <div class="flex space-x-3">
+                            <div class="w-10 h-7 bg-white rounded flex items-center justify-center shadow-sm">
+                                <i class="fab fa-cc-visa text-blue-600 text-lg"></i>
+                            </div>
+                            <div class="w-10 h-7 bg-white rounded flex items-center justify-center shadow-sm">
+                                <i class="fab fa-cc-mastercard text-red-600 text-lg"></i>
+                            </div>
+                            <div class="w-10 h-7 bg-white rounded flex items-center justify-center shadow-sm">
+                                <i class="fas fa-university text-gray-700 text-lg"></i>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="mt-4 md:mt-0">
-                        <button class="red-btn text-white font-semibold py-3 px-6 rounded-lg flex items-center">
-                            <i class="fas fa-headset mr-2"></i> Заказать звонок
+                    <div>
+                        <button class="footer-btn text-white font-semibold py-3.5 px-8 rounded-xl flex items-center group">
+                            <i class="fas fa-headset mr-3"></i> 
+                            <span>Заказать звонок</span>
+                            <i class="fas fa-arrow-right ml-3 opacity-0 group-hover:opacity-100 group-hover:ml-4 transition-all duration-300"></i>
                         </button>
                     </div>
                 </div>
                 
                 <!-- Дополнительная информация -->
-                <div class="text-center mt-6">
-                    <p class="text-xs text-gray-500">
-                        Zinway — официальный партнер ведущих автопроизводителей Китая: BYD, Geely, Chery, Haval, Changan.
+                <div class="text-center pt-6 border-t footer-divider">
+                    <p class="text-sm text-gray-500 max-w-3xl mx-auto">
+                        Zinway — официальный партнер ведущих автопроизводителей Китая: 
+                        <span class="text-gray-300 font-medium">BYD, Geely, Chery, Haval, Changan, Li Auto, EXEED, GAC.</span>
                         Все автомобили проходят предпродажную подготовку и имеют гарантию производителя.
                     </p>
+                    <div class="flex flex-wrap justify-center gap-4 mt-4">
+                        <span class="px-3 py-1.5 bg-white bg-opacity-5 rounded-full text-xs text-gray-300">Сертифицированный импортер</span>
+                        <span class="px-3 py-1.5 bg-white bg-opacity-5 rounded-full text-xs text-gray-300">Официальная гарантия</span>
+                        <span class="px-3 py-1.5 bg-white bg-opacity-5 rounded-full text-xs text-gray-300">Бесплатная доставка по РФ</span>
+                    </div>
                 </div>
             </div>
         </div>
+        
     </footer>
+
+    <script>
+        // Анимация появления элементов при скролле
+        document.addEventListener('DOMContentLoaded', function() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-fadeInUp');
+                    }
+                });
+            }, observerOptions);
+            
+            // Наблюдаем за анимируемыми элементами
+            document.querySelectorAll('.animate-fadeInUp').forEach(el => {
+                observer.observe(el);
+            });
+            
+            // Обработка формы подписки
+            const newsletterForm = document.querySelector('form');
+            if (newsletterForm) {
+                newsletterForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const email = this.querySelector('input[type="email"]').value;
+                    if (email) {
+                        // Здесь можно добавить отправку данных на сервер
+                        alert('Спасибо за подписку! На ' + email + ' будут приходить новости Zinway.');
+                        this.reset();
+                    }
+                });
+            }
+        });
+        // Добавить в существующий script тег
+document.addEventListener('DOMContentLoaded', function() {
+    // Аккордеон для мобильного меню
+    const accordionBtns = document.querySelectorAll('.accordion-btn');
+    
+    accordionBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            // Закрываем все остальные аккордеоны
+            accordionBtns.forEach(otherBtn => {
+                if (otherBtn !== this) {
+                    otherBtn.classList.remove('active');
+                    const otherContent = otherBtn.nextElementSibling;
+                    if (otherContent) {
+                        otherContent.style.maxHeight = '0';
+                    }
+                }
+            });
+            
+            // Переключаем текущий аккордеон
+            this.classList.toggle('active');
+            const content = this.nextElementSibling;
+            
+            if (content) {
+                if (this.classList.contains('active')) {
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                } else {
+                    content.style.maxHeight = '0';
+                }
+            }
+        });
+    });
+    
+    // Открываем первый аккордеон по умолчанию
+    if (accordionBtns.length > 0) {
+        accordionBtns[0].click();
+    }
+});
+    </script>
+    
 </body>
+
 </html>

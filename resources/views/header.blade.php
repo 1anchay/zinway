@@ -72,57 +72,142 @@
         .business-border {
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
-        .contact-info {
+        
+        /* Стили для компактной контактной панели */
+        .compact-contact-panel {
             display: flex;
             align-items: center;
-            padding: 8px 16px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 8px;
-            transition: background 0.3s ease;
+            justify-content: space-between;
+            gap: 20px;
         }
-        .contact-info:hover {
+        
+        .contact-item-compact {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 6px 12px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .contact-item-compact:hover {
             background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-1px);
+        }
+        
+        .contact-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #DC2626 0%, #B91C1C 100%);
+        }
+        
+        .contact-text {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .contact-main {
+            font-weight: 600;
+            font-size: 0.9rem;
+            line-height: 1.2;
+        }
+        
+        .contact-sub {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.2;
+        }
+        
+        .social-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-left: 12px;
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Адаптивность для компактной панели */
+        @media (max-width: 1024px) {
+            .compact-contact-panel {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+            }
+            
+            .contact-item-compact {
+                flex: 1;
+                min-width: 200px;
+                max-width: 250px;
+            }
+            
+            .social-section {
+                border-left: none;
+                padding-left: 0;
+                justify-content: center;
+                width: 100%;
+                margin-top: 10px;
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .contact-item-compact {
+                min-width: 100%;
+            }
+            
+            .compact-contact-panel {
+                flex-direction: column;
+                gap: 8px;
+            }
         }
     </style>
 </head>
 <body>
     <!-- Header -->
     <header class="sticky top-0 z-50 shadow-2xl">
-        <!-- Верхняя контактная панель -->
+        <!-- Верхняя контактная панель - КОМПАКТНАЯ -->
         <div class="header-gradient text-white py-3 px-4 business-border">
             <div class="container mx-auto">
-                <div class="flex flex-col lg:flex-row justify-between items-center">
-                    <!-- Контактная информация -->
-                    <div class="flex flex-wrap justify-center gap-4 md:gap-8 mb-3 lg:mb-0">
-                        <div class="contact-info">
-                            <i class="fas fa-phone-alt text-red-400 mr-3 text-lg"></i>
-                            <div>
-                                <div class="font-semibold">+7 (800) 555-35-35</div>
-                                <div class="text-xs text-gray-300">Бесплатный звонок по России</div>
-                            </div>
+                <div class="compact-contact-panel">
+                    <!-- Контактные данные в компактном формате -->
+                    <div class="contact-item-compact">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone-alt text-white text-sm"></i>
                         </div>
-                        
-                        <div class="contact-info">
-                            <i class="fas fa-clock text-red-400 mr-3 text-lg"></i>
-                            <div>
-                                <div class="font-semibold">Пн-Пт 9:00-20:00</div>
-                                <div class="text-xs text-gray-300">Сб-Вс 10:00-18:00</div>
-                            </div>
-                        </div>
-                        
-                        <div class="contact-info">
-                            <i class="fas fa-map-marker-alt text-red-400 mr-3 text-lg"></i>
-                            <div>
-                                <div class="font-semibold">Доставка по РФ</div>
-                                <div class="text-xs text-gray-300">Крым, ДНР, ЛНР включительно</div>
-                            </div>
+                        <div class="contact-text">
+                            <span class="contact-main">+7 (800) 555-35-35</span>
+                            <span class="contact-sub">Бесплатный звонок по России</span>
                         </div>
                     </div>
                     
-                    <!-- Социальные сети -->
-                    <div class="flex items-center space-x-3">
-                        <span class="text-sm text-gray-300 hidden md:block">Мы в соцсетях:</span>
-                        <div class="flex space-x-2">
+                    <div class="contact-item-compact">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock text-white text-sm"></i>
+                        </div>
+                        <div class="contact-text">
+                            <span class="contact-main">Пн-Пт 9:00-20:00</span>
+                            <span class="contact-sub">Сб-Вс 10:00-18:00</span>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item-compact">
+                        <div class="contact-icon">
+                            <i class="fas fa-truck text-white text-sm"></i>
+                        </div>
+                        <div class="contact-text">
+                            <span class="contact-main">Доставка по РФ</span>
+                            <span class="contact-sub">Крым, ДНР, ЛНР включительно</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Социальные сети справа -->
+                    <div class="social-section">
+                        <span class="text-sm text-gray-300 whitespace-nowrap">Мы в соцсетях:</span>
+                        <div class="flex gap-2">
                             <a href="#" class="social-icon avito-bg text-white" title="Наш Avito">
                                 <i class="fas fa-store text-lg"></i>
                             </a>
@@ -259,7 +344,5 @@
         </div>
     </header>
 
-    <!-- Просто контент для демонстрации высоты -->
-    <div style="height: 1000px; background: linear-gradient(180deg, #f8fafc 0%, #e2e8f0 100%);"></div>
 </body>
 </html>
