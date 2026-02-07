@@ -318,7 +318,7 @@
                                 <i class="fas fa-chevron-down ml-2 text-xs"></i>
                             </a>
                             <div class="absolute left-0 mt-2 w-48 bg-white rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-10 border border-gray-100">
-                                <a href="#" class="block px-4 py-3 text-gray-700 hover:bg-red-50 hover:text-red-600 border-b border-gray-100">Подбор авто</a>
+                                <a href="{{ route('catalog') }}" class="block px-4 py-3 text-gray-700 hover:bg-red-50 hover:text-red-600 border-b border-gray-100">Каталог</a>
                                 <a href="#" class="block px-4 py-3 text-gray-700 hover:bg-red-50 hover:text-red-600 border-b border-gray-100">Доставка и растаможка</a>
                                 <a href="#" class="block px-4 py-3 text-gray-700 hover:bg-red-50 hover:text-red-600">Сервисное обслуживание</a>
                             </div>
