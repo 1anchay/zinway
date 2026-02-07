@@ -451,7 +451,7 @@
                 
                 <!-- Навигация -->
                 <nav class="py-2">
-                    <a href="#{{ route('welcome') }}" class="menu-link" onclick="closeMobileMenu()">
+                    <a href="{{ route('welcome') }}" class="menu-link" onclick="closeMobileMenu()">
                         <i class="fas fa-home"></i>
                         <span>Главная</span>
                     </a>
@@ -477,21 +477,7 @@
                         </div>
                     </div>
                     
-                    <!-- Аккордеон Автомобили -->
-                    <div class="menu-accordion">
-                        <button class="menu-item accordion-btn" onclick="toggleAccordion(this)">
-                            <div class="flex items-center">
-                                <i class="fas fa-globe-asia"></i>
-                                <span>Автомобили по странам</span>
-                            </div>
-                            <i class="fas fa-chevron-down ml-auto text-gray-400 text-sm transition-transform duration-300"></i>
-                        </button>
-                        <div class="menu-accordion-content">
-                            <a href="#" class="menu-subitem" onclick="closeMobileMenu()">Китайские автомобили</a>
-                            <a href="#" class="menu-subitem" onclick="closeMobileMenu()">Корейские автомобили</a>
-                            <a href="#" class="menu-subitem" onclick="closeMobileMenu()">Японские автомобили</a>
-                        </div>
-                    </div>
+                    
                     
                     <a href="#" class="menu-link" onclick="closeMobileMenu()">
                         <i class="fas fa-building"></i>
