@@ -407,60 +407,7 @@
 </head>
 <body>
     <!-- Header -->
-    <header class="sticky top-0 z-50 shadow-2xl bg-white">
-        <!-- Верхняя контактная панель - КОМПАКТНАЯ -->
-        <div class="contact-panel header-gradient text-white py-3 px-4 business-border">
-            <div class="container mx-auto">
-                <div class="compact-contact-panel">
-                    <!-- Контактные данные в компактном формате -->
-                    <div class="contact-item-compact">
-                        <div class="contact-icon">
-                            <i class="fas fa-phone-alt text-white text-sm"></i>
-                        </div>
-                        <div class="contact-text">
-                            <span class="contact-main">+7 (800) 555-35-35</span>
-                            <span class="contact-sub">Бесплатный звонок по России</span>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-item-compact">
-                        <div class="contact-icon">
-                            <i class="fas fa-clock text-white text-sm"></i>
-                        </div>
-                        <div class="contact-text">
-                            <span class="contact-main">Пн-Пт 9:00-20:00</span>
-                            <span class="contact-sub">Сб-Вс 10:00-18:00</span>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-item-compact">
-                        <div class="contact-icon">
-                            <i class="fas fa-truck text-white text-sm"></i>
-                        </div>
-                        <div class="contact-text">
-                            <span class="contact-main">Доставка по РФ</span>
-                            <span class="contact-sub">Крым, ДНР, ЛНР включительно</span>
-                        </div>
-                    </div>
-                    
-                    <!-- Социальные сети -->
-                    <div class="social-section">
-                        <span class="text-sm text-gray-300 whitespace-nowrap">Мы в соцсетях:</span>
-                        <div class="flex gap-2">
-                            <a href="#" class="social-icon avito-bg text-white" title="Наш Avito">
-                                <i class="fas fa-store text-lg"></i>
-                            </a>
-                            <a href="#" class="social-icon tiktok-bg text-white" title="Наш TikTok">
-                                <i class="fab fa-tiktok text-lg"></i>
-                            </a>
-                            <a href="#" class="social-icon instagram-bg text-white" title="Наш Instagram">
-                                <i class="fab fa-instagram text-lg"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    
         
         <!-- Основная навигация -->
         <nav class="bg-white py-4">
