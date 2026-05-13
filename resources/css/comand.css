@@ -1,0 +1,27 @@
+/* comand.css */
+.magic-hat {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+}
+
+.team-member {
+    position: relative;
+    overflow: hidden;
+    padding: 20px;
+    background-color: #2d3748;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease;
+}
+
+.team-member:hover {
+    transform: scale(1.05);
+}
+
+.member-info p {
+    margin-top: 10px;
+    color: #e2e8f0;
+}

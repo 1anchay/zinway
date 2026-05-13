@@ -1,0 +1,17 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source "../**/*.blade.php";
+@source "../**/*.js";
+@source "../**/*.vue";
+
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uL3Jlc291cmNlcy9jc3MvYXBwLmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSIsImZpbGUiOiJhcHAuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiQGltcG9ydCAndGFpbHdpbmRjc3MnO1xuXG5Ac291cmNlICcuLi8uLi92ZW5kb3IvbGFyYXZlbC9mcmFtZXdvcmsvc3JjL0lsbHVtaW5hdGUvUGFnaW5hdGlvbi9yZXNvdXJjZXMvdmlld3MvKi5ibGFkZS5waHAnO1xuQHNvdXJjZSAnLi4vLi4vc3RvcmFnZS9mcmFtZXdvcmsvdmlld3MvKi5waHAnO1xuQHNvdXJjZSBcIi4uLyoqLyouYmxhZGUucGhwXCI7XG5Ac291cmNlIFwiLi4vKiovKi5qc1wiO1xuQHNvdXJjZSBcIi4uLyoqLyoudnVlXCI7XG5cbkB0aGVtZSB7XG4gICAgLS1mb250LXNhbnM6ICdJbnN0cnVtZW50IFNhbnMnLCB1aS1zYW5zLXNlcmlmLCBzeXN0ZW0tdWksIHNhbnMtc2VyaWYsICdBcHBsZSBDb2xvciBFbW9qaScsICdTZWdvZSBVSSBFbW9qaScsXG4gICAgICAgICdTZWdvZSBVSSBTeW1ib2wnLCAnTm90byBDb2xvciBFbW9qaSc7XG59XG5AdGFpbHdpbmQgYmFzZTtcbkB0YWlsd2luZCBjb21wb25lbnRzO1xuQHRhaWx3aW5kIHV0aWxpdGllcztcbiJdfQ== */
