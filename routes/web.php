@@ -80,7 +80,7 @@ Route::get('/comments-page', function () {
     return view('comments');
 })->name('comments.page');
 
-Route::get('/comments', [CommentController::class, 'index'])->name('comments');
+Route::get('/comments', [CommentController::class, 'index'])->name('comments.index');
 
 Route::middleware('auth')->group(function () {
     Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
