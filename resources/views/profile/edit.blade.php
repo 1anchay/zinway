@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html lang="ru">
 
-@include('hader') <!-- Подключение header -->
-
 <head>
     <meta charset="UTF-8">
-    <title>Профиль | ТехноЛаб</title>
-    @viteReactRefresh
-    @vite(['resources/js/app.js'])
-    
+    <title>Профиль | Курс молодого бойца VR</title>
+
+    {{-- Vite отключён на хостинге --}}
+    {{-- @viteReactRefresh --}}
+    {{-- @vite(['resources/js/app.js']) --}}
+
     <!-- Подключение шрифтов -->
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    
+
     <!-- Heroicons -->
     <script src="https://unpkg.com/@heroicons/react@1.0.6/outline.js" data-manual></script>
-    
+
     <style>
         :root {
             --primary: #171a21;
@@ -28,7 +28,7 @@
             --panel-bg: rgba(23, 26, 33, 0.8);
             --panel-border: rgba(102, 192, 244, 0.2);
         }
-        
+
         body {
             background: linear-gradient(135deg, #0e141b 0%, #1a2a3a 100%);
             color: var(--text-primary);
@@ -235,15 +235,6 @@
             transform: translateY(-2px);
         }
 
-        .btn-accent {
-            background: var(--tech-orange);
-            color: var(--primary);
-        }
-
-        .btn-accent:hover {
-            background: #f7b239;
-        }
-
         .btn-outline {
             background: transparent;
             border: 1px solid var(--accent);
@@ -429,98 +420,110 @@
 </head>
 
 <body>
+    @include('hader')
+
     <div class="tech-bg"></div>
-    
+
     <div class="container">
-        <h1 class="tech-font">ТехноПрофиль</h1>
-        
+        <h1 class="tech-font">Профиль обучающегося VR-тренажёра</h1>
+
         <div class="profile-section">
             <div class="profile-card">
-                <div class="avatar-section">
-                    <div class="avatar-wrapper">
-                        @if(Auth::user()->avatar)
-                            <img id="current-avatar" class="avatar" src="{{ asset('storage/' . Auth::user()->avatar) }}" alt="Avatar">
-                        @else
-                            <img id="current-avatar" class="avatar" src="https://i.imgur.com/JYlZf8r.png" alt="Default Avatar">
-                        @endif
-                        <div class="avatar-edit" onclick="document.getElementById('avatar').click()">
-                            <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                            </svg>
+                <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
+
+                    <div class="avatar-section">
+                        <div class="avatar-wrapper">
+                            @if(Auth::user()->avatar)
+                                <img id="current-avatar" class="avatar" src="{{ asset('storage/' . Auth::user()->avatar) }}" alt="Avatar">
+                            @else
+                                <img id="current-avatar" class="avatar" src="https://i.imgur.com/JYlZf8r.png" alt="Default Avatar">
+                            @endif
+
+                            <div class="avatar-edit" onclick="document.getElementById('avatar').click()">
+                                <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                </svg>
+                            </div>
+
+                            <input type="file" id="avatar" name="avatar" class="avatar-upload" accept="image/*">
                         </div>
-                        <input type="file" id="avatar" name="avatar" class="avatar-upload" accept="image/*">
+
+                        <div class="progress-bar">
+                            <div class="progress-fill"></div>
+                        </div>
+                        <div class="form-label">Профиль завершён на 70%</div>
                     </div>
-                    
-                    <div class="progress-bar">
-                        <div class="progress-fill"></div>
+
+                    <div class="form-group">
+                        <label for="name" class="form-label">Имя обучающегося</label>
+                        <input type="text" id="name" name="name" value="{{ Auth::user()->name }}" class="input-field" required>
                     </div>
-                    <div class="form-label">Профиль завершен на 70%</div>
-                </div>
 
-                <div class="form-group">
-                    <label for="name" class="form-label">Имя пользователя</label>
-                    <input type="text" id="name" name="name" value="{{ Auth::user()->name }}" class="input-field" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="email" class="form-label">Электронная почта</label>
-                    <input type="email" id="email" name="email" value="{{ Auth::user()->email }}" class="input-field" required>
-                </div>
-
-                @if(Auth::user()->email_verified_at == null)
-                    <div class="flex items-center mt-4">
-                        <span class="status-badge status-badge-warning">
-                            <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                            </svg>
-                            Не подтвержден
-                        </span>
-                        <button type="button" onclick="sendVerificationEmail()" class="btn btn-outline ml-auto">
-                            Подтвердить
-                        </button>
+                    <div class="form-group">
+                        <label for="email" class="form-label">Электронная почта</label>
+                        <input type="email" id="email" name="email" value="{{ Auth::user()->email }}" class="input-field" required>
                     </div>
-                @endif
 
-                <div class="divider"></div>
+                    @if(Auth::user()->email_verified_at == null)
+                        <div class="flex items-center mt-4">
+                            <span class="status-badge status-badge-warning">
+                                <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                                </svg>
+                                Не подтверждён
+                            </span>
 
-                <button type="submit" class="btn btn-primary w-full tech-font">
-                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                    </svg>
-                    Обновить профиль
-                </button>
+                            <button type="button" onclick="sendVerificationEmail()" class="btn btn-outline" style="margin-left: auto;">
+                                Подтвердить
+                            </button>
+                        </div>
+                    @endif
+
+                    <div class="divider"></div>
+
+                    <button type="submit" class="btn btn-primary tech-font" style="width: 100%;">
+                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                        Обновить профиль
+                    </button>
+                </form>
             </div>
 
             <div class="profile-card" style="position: relative;">
                 <div class="robot-illustration">
-                    <img src="https://i.imgur.com/7QZ4m3x.png" alt="Robot Assistant">
+                    <img src="https://i.imgur.com/7QZ4m3x.png" alt="VR Instructor">
                 </div>
-                
-                <h3 class="tech-font" style="font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--accent);">Статистика профиля</h3>
-                
+
+                <h3 class="tech-font" style="font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--accent);">
+                    Статистика подготовки
+                </h3>
+
                 <div class="info-grid">
                     <div class="info-item">
-                        <div class="info-label">Уровень аккаунта</div>
+                        <div class="info-label">Уровень подготовки</div>
                         <div class="info-value">15</div>
                         <div class="progress-bar" style="margin-top: 0.5rem;">
                             <div class="progress-fill" style="width: 65%;"></div>
                         </div>
                     </div>
-                    
+
                     <div class="info-item">
                         <div class="info-label">Дата регистрации</div>
                         <div class="info-value">{{ Auth::user()->created_at->format('d.m.Y') }}</div>
                     </div>
-                    
+
                     <div class="info-item">
-                        <div class="info-label">Статус</div>
+                        <div class="info-label">Статус обучения</div>
                         <div class="info-value">
                             @if(Auth::user()->email_verified_at)
                                 <span class="status-badge status-badge-success">
                                     <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                                     </svg>
-                                    Премиум
+                                    Подтверждён
                                 </span>
                             @else
                                 <span class="status-badge status-badge-warning">
@@ -532,28 +535,31 @@
                             @endif
                         </div>
                     </div>
-                    
+
                     <div class="info-item">
-                        <div class="info-label">Активность</div>
+                        <div class="info-label">Активность в тренажёре</div>
                         <div class="info-value">Высокая</div>
                     </div>
                 </div>
-                
+
                 <div class="divider"></div>
-                
-                <h4 class="form-label" style="margin-bottom: 1rem;">Достижения</h4>
+
+                <h4 class="form-label" style="margin-bottom: 1rem;">Учебные достижения</h4>
+
                 <div class="achievements">
                     <div class="achievement">
-                        <img src="https://i.imgur.com/5X5w0Q8.png" alt="Новичок">
-                        <div class="achievement-name">Новичок</div>
+                        <img src="https://i.imgur.com/5X5w0Q8.png" alt="Новобранец">
+                        <div class="achievement-name">Новобранец</div>
                     </div>
+
                     <div class="achievement">
-                        <img src="https://i.imgur.com/8Q5ZJ9G.png" alt="Активный">
-                        <div class="achievement-name">Активный</div>
+                        <img src="https://i.imgur.com/8Q5ZJ9G.png" alt="Активный курсант">
+                        <div class="achievement-name">Активный курсант</div>
                     </div>
+
                     <div class="achievement">
-                        <img src="https://i.imgur.com/3Q5ZJ9G.png" alt="Технарь">
-                        <div class="achievement-name">Технарь</div>
+                        <img src="https://i.imgur.com/3Q5ZJ9G.png" alt="VR-практика">
+                        <div class="achievement-name">VR-практика</div>
                     </div>
                 </div>
             </div>
@@ -561,21 +567,22 @@
     </div>
 
     <div class="ai-assistant" onclick="showAIModal()">
-        <img src="https://i.imgur.com/7QZ4m3x.png" alt="AI Assistant">
+        <img src="https://i.imgur.com/7QZ4m3x.png" alt="VR Instructor">
     </div>
 
     @include('footer')
 
     <script>
-        // Обработка изменения аватара
         document.getElementById('avatar').addEventListener('change', function(e) {
             if (e.target.files && e.target.files[0]) {
                 const reader = new FileReader();
+
                 reader.onload = function(event) {
                     document.getElementById('current-avatar').src = event.target.result;
                     document.querySelector('.progress-fill').style.width = '85%';
-                    document.querySelector('.form-label').textContent = 'Профиль завершен на 85%';
+                    document.querySelector('.form-label').textContent = 'Профиль завершён на 85%';
                 };
+
                 reader.readAsDataURL(e.target.files[0]);
             }
         });
@@ -599,16 +606,16 @@
         }
 
         function showAIModal() {
-            alert('Привет! Я ваш AI-ассистент. Чем могу помочь?');
-            // Здесь можно реализовать модальное окно с чат-ботом
+            alert('Привет! Я VR-инструктор. Могу помочь с прохождением курса молодого бойца.');
         }
 
-        // Анимация прогресс-бара
         document.addEventListener('DOMContentLoaded', function() {
             const progressBars = document.querySelectorAll('.progress-fill');
+
             progressBars.forEach(bar => {
                 const targetWidth = bar.style.width;
                 bar.style.width = '0';
+
                 setTimeout(() => {
                     bar.style.width = targetWidth;
                 }, 300);
