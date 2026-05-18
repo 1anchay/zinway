@@ -438,12 +438,7 @@
                             <input type="email" id="email" name="email" value="{{ Auth::user()->email }}" class="input-field" required>
                         </div>
 
-                        @if(Auth::user()->email_verified_at == null)
-                            <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
-                                <span class="status-badge status-badge-warning">Не подтверждён</span>
-                                <button type="button" onclick="sendVerificationEmail()" class="btn btn-outline">Подтвердить</button>
-                            </div>
-                        @endif
+                       
 
                         <div class="divider"></div>
 
