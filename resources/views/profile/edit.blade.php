@@ -334,7 +334,7 @@
             pointer-events: none;
         }
 
-        @media (max-width: 900px) {
+        @media (max-width: 900px) {unction sendVerificationEmail() {
             .profile-section {
                 grid-template-columns: 1fr;
             }
@@ -532,23 +532,7 @@
             });
         }
 
-        function sendVerificationEmail() {
-            fetch('{{ route('verification.send') }}', {
-                method: 'POST',
-                headers: {
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                    'Accept': 'application/json',
-                }
-            }).then(response => {
-                if (response.status === 200) {
-                    alert('Письмо для подтверждения отправлено на ваш email');
-                } else {
-                    alert('Ошибка при отправке письма');
-                }
-            }).catch(error => {
-                console.error('Error:', error);
-            });
-        }
+       
 
         function showAIModal() {
             alert('Привет! Я VR-инструктор. Могу помочь с прохождением курса молодого бойца.');
