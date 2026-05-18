@@ -193,7 +193,7 @@
                 ЗАГРУЗКА IT КМБ
             </h1>
             <p class="text-xl text-gray-400 max-w-3xl mx-auto">
-                Виртуальный тренинг для будущих IT-специалистов. Скачайте игру и начните свой путь в мир военного программирования.
+                Информационно-тренировочное VR-приложение для автономных VR-шлемов. Скачайте APK-файл и установите его на Meta Quest / Oculus Quest.
             </p>
         </div>
 
@@ -253,7 +253,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
                     </svg>
-                    Размер: 2.4 GB
+                    Формат: Android APK
                 </span>
                 <span class="flex items-center" id="downloads-count">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -276,7 +276,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
             </svg>
-            СКАЧАТЬ VR КМБ
+            СКАЧАТЬ APK ДЛЯ VR-ШЛЕМА
         </button>
         
         <!-- Информация о файле -->
@@ -284,7 +284,8 @@
             <div class="flex justify-center space-x-6">
                 <div>
                     <p class="font-medium text-gray-400">Файл:</p>
-                    <p class="text-blue-400">VR_KMB_Setup.exe</p>
+                    <p class="text-blue-400">it_kmb.apk</p>
+                    <p class="text-xs text-gray-500">/files/it_kmb.apk</p>
                 </div>
                 <div>
                     <p class="font-medium text-gray-400">Целостность:</p>
@@ -330,8 +331,10 @@
 document.addEventListener('DOMContentLoaded', function() {
     const downloadBtn = document.getElementById('download-btn');
     const progressBar = document.getElementById('download-progress');
+    const apkUrl = '/files/it_kmb.apk';
     
     downloadBtn.addEventListener('click', function() {
+        window.location.href = apkUrl;
         // Анимация загрузки
         downloadBtn.disabled = true;
         downloadBtn.innerHTML = `
@@ -397,35 +400,35 @@ document.addEventListener('DOMContentLoaded', function() {
 
             <!-- Блок с инструкциями -->
             <div class="space-y-8">
-                <!-- Требования к системе -->
+                <!-- Требования к VR-шлему -->
                 <div class="card-hud p-6 rounded-xl">
                     <h2 class="text-2xl font-bold hud-font text-gray-200 mb-4 flex items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
                         </svg>
-                        ТРЕБОВАНИЯ К СИСТЕМЕ
+                        ТРЕБОВАНИЯ К VR-ШЛЕМУ
                     </h2>
                     
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
                             <h3 class="font-bold text-blue-400 mb-3">МИНИМАЛЬНЫЕ</h3>
                             <ul class="space-y-3">
-                                <li class="requirement-item">ОС: Windows 10 (64-bit)</li>
-                                <li class="requirement-item">Процессор: Intel i5-4590 / AMD FX 8350</li>
-                                <li class="requirement-item">Память: 8 GB RAM</li>
-                                <li class="requirement-item">Видеокарта: NVIDIA GTX 970 / AMD Radeon R9 290</li>
-                                <li class="requirement-item">Место на диске: 5 GB</li>
+                                <li class="requirement-item">Устройство: Meta Quest 2 / Oculus Quest 2 или аналогичный автономный VR-шлем</li>
+                                <li class="requirement-item">Платформа: Android-based VR headset</li>
+                                <li class="requirement-item">Память: от 6 GB RAM</li>
+                                <li class="requirement-item">Поддержка: 6DoF, контроллеры движения и OpenXR/XR Interaction</li>
+                                <li class="requirement-item">Свободное место: не менее 1 GB</li>
                             </ul>
                         </div>
                         
                         <div>
                             <h3 class="font-bold text-green-400 mb-3">РЕКОМЕНДУЕМЫЕ</h3>
                             <ul class="space-y-3">
-                                <li class="requirement-item">ОС: Windows 11 (64-bit)</li>
-                                <li class="requirement-item">Процессор: Intel i7-6700K / AMD Ryzen 5 1600</li>
-                                <li class="requirement-item">Память: 16 GB RAM</li>
-                                <li class="requirement-item">Видеокарта: NVIDIA GTX 1070 / AMD RX Vega 56</li>
-                                <li class="requirement-item">Место на диске: 5 GB SSD</li>
+                                <li class="requirement-item">Устройство: Meta Quest 3 / Meta Quest 3S</li>
+                                <li class="requirement-item">Прошивка: актуальная версия Meta Quest OS</li>
+                                <li class="requirement-item">Память: 8 GB RAM и выше</li>
+                                <li class="requirement-item">Режим: автономный запуск без подключения к ПК</li>
+                                <li class="requirement-item">Свободное место: не менее 1 GB SSD</li>
                             </ul>
                         </div>
                     </div>
@@ -445,24 +448,24 @@ document.addEventListener('DOMContentLoaded', function() {
                             <div class="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mt-1 mr-3">1</div>
                             <div>
                                 <h3 class="font-bold text-gray-200">Скачайте установочный файл</h3>
-                                <p class="text-gray-400">Нажмите кнопку "Скачать игру" выше и дождитесь завершения загрузки.</p>
+                                <p class="text-gray-400">Нажмите кнопку «Скачать APK для VR-шлема» выше. Файл будет загружен как it_kmb.apk.</p>
                             </div>
                         </div>
                         
                         <div class="flex items-start">
                             <div class="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mt-1 mr-3">2</div>
                             <div>
-                                <h3 class="font-bold text-gray-200">Запустите IT_KMB_Setup.exe</h3>
-                                <p class="text-gray-400">Найдите скачанный файл и запустите его от имени администратора.</p>
-                                <p class="text-xs text-gray-500 mt-1">* Система может запросить подтверждение</p>
+                                <h3 class="font-bold text-gray-200">Разрешите установку APK на шлем</h3>
+                                <p class="text-gray-400">Установите APK через SideQuest, Meta Quest Developer Hub или ADB. Для этого на шлеме должен быть включён режим разработчика.</p>
+                                <p class="text-xs text-gray-500 mt-1">* На шлеме подтвердите установку из неизвестных источников</p>
                             </div>
                         </div>
                         
                         <div class="flex items-start">
                             <div class="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mt-1 mr-3">3</div>
                             <div>
-                                <h3 class="font-bold text-gray-200">Следуйте инструкциям установщика</h3>
-                                <p class="text-gray-400">Выберите папку для установки и дождитесь завершения процесса.</p>
+                                <h3 class="font-bold text-gray-200">Установите файл it_kmb.apk</h3>
+                                <p class="text-gray-400">Подключите VR-шлем к компьютеру по USB, подтвердите доступ в шлеме и выберите файл public/files/it_kmb.apk для установки.</p>
                             </div>
                         </div>
                         
@@ -470,7 +473,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             <div class="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mt-1 mr-3">4</div>
                             <div>
                                 <h3 class="font-bold text-gray-200">Запустите игру</h3>
-                                <p class="text-gray-400">После установки ярлык появится на рабочем столе. Запустите игру и начните обучение!</p>
+                                <p class="text-gray-400">После установки откройте библиотеку приложений на шлеме, перейдите в раздел «Неизвестные источники» и запустите IT КМБ.</p>
                             </div>
                         </div>
                     </div>
@@ -489,13 +492,13 @@ document.addEventListener('DOMContentLoaded', function() {
             
             <div class="space-y-4">
                 <div class="p-4 bg-gray-800 rounded-lg border-l-4 border-red-500">
-                    <h3 class="font-bold text-red-400 mb-2">Антивирусные программы</h3>
-                    <p class="text-gray-300">Некоторые антивирусы могут ошибочно блокировать наш файл. Если это произошло, добавьте игру в исключения вашего антивируса.</p>
+                    <h3 class="font-bold text-red-400 mb-2">Установка из неизвестных источников</h3>
+                    <p class="text-gray-300">Так как приложение распространяется в формате APK, шлем может показать предупреждение. Устанавливайте файл только с официальной страницы проекта.</p>
                 </div>
                 
                 <div class="p-4 bg-gray-800 rounded-lg border-l-4 border-yellow-500">
                     <h3 class="font-bold text-yellow-400 mb-2">VR-совместимость</h3>
-                    <p class="text-gray-300">Для полного погружения рекомендуем использовать VR-гарнитуру, но игра также работает и в обычном режиме.</p>
+                    <p class="text-gray-300">Приложение предназначено для автономных VR-шлемов Meta/Oculus Quest. Обычный запуск на Windows без шлема не предусмотрен.</p>
                 </div>
                 
                 <div class="p-4 bg-gray-800 rounded-lg border-l-4 border-green-500">
@@ -513,6 +516,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.addEventListener('DOMContentLoaded', function() {
             const downloadBtn = document.getElementById('download-btn');
             const downloadProgress = document.getElementById('download-progress');
+            const apkUrl = '/files/it_kmb.apk';
             const downloadsCount = document.getElementById('downloads-count');
             
             // Обновляем счетчик скачиваний
@@ -524,6 +528,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Обработка клика по кнопке скачивания
             downloadBtn.addEventListener('click', function() {
+                window.location.href = apkUrl;
                 // Имитация загрузки
                 downloadBtn.disabled = true;
                 downloadBtn.innerHTML = `
@@ -654,19 +659,19 @@ document.addEventListener('DOMContentLoaded', function() {
                         </svg>
                     </button>
                     <div class="faq-answer mt-2 text-gray-400 hidden">
-                        <p>Игра поддерживает все основные VR-гарнитуры: Oculus Rift S, Quest (через Link), HTC Vive, Valve Index, Windows Mixed Reality. Для каждой гарнитуры есть оптимальные настройки.</p>
+                        <p>APK-сборка рассчитана на автономные VR-шлемы Meta/Oculus Quest: Quest 2, Quest 3 и Quest 3S. Запуск через PC VR, SteamVR или Windows Mixed Reality для этой версии не требуется.</p>
                     </div>
                 </div>
                 
                 <div class="border-b border-gray-700 pb-4">
                     <button class="faq-question flex justify-between items-center w-full text-left font-bold text-gray-200 hover:text-blue-400 transition-colors">
-                        <span>Можно ли играть без VR-гарнитуры?</span>
+                        <span>Можно ли приложениеть без VR-гарнитуры?</span>
                         <svg class="h-5 w-5 transform transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                         </svg>
                     </button>
                     <div class="faq-answer mt-2 text-gray-400 hidden">
-                        <p>Да, игра имеет режим "Desktop Mode" с обычным управлением мышью и клавиатурой. Однако для полного погружения рекомендуется использовать VR.</p>
+                        <p>Нет, данная сборка предназначена для установки на автономный VR-шлем в формате APK. Для работы требуется совместимый шлем Meta/Oculus Quest.</p>
                     </div>
                 </div>
                 
@@ -678,7 +683,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         </svg>
                     </button>
                     <div class="faq-answer mt-2 text-gray-400 hidden">
-                        <p>Игра автоматически проверяет обновления при запуске. Вы также можете вручную проверить обновления в настройках лаунчера.</p>
+                        <p>Для обновления скачайте новую версию APK с сайта и установите её поверх предыдущей версии на VR-шлем.</p>
                     </div>
                 </div>
                 
